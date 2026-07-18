@@ -7,7 +7,7 @@ var day: int = 1
 
 func _ready() -> void:
 	theme = UIKit.theme()
-	set_anchors_preset(Control.PRESET_CENTER)
+	UIKit.center_popup(self)
 	custom_minimum_size = Vector2(460, 320)
 	var v := UIKit.vbox(8)
 	add_child(v)

@@ -1,2 +1,15 @@
+# Godot editor cache
 .godot/
 *.tmp
+
+# Exported binaries exceed GitHub's 100 MB per-file limit (the Godot runtime
+# alone is ~110 MB), so the generated builds are not committed. Build them with:
+#   godot --headless --export-release "Windows Desktop" dist/GreenEmpire/GreenEmpire.exe
+#   godot --headless --export-release "Linux" dist/linux/GreenEmpire.x86_64
+dist/GreenEmpire/GreenEmpire.exe
+dist/GreenEmpire/*.pck
+dist/linux/GreenEmpire.x86_64
+dist/linux/*.pck
+
+# Local user data
+user_data/

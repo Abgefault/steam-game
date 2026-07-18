@@ -6,7 +6,7 @@ var event_data: Dictionary = {}
 
 func _ready() -> void:
 	theme = UIKit.theme()
-	set_anchors_preset(Control.PRESET_CENTER)
+	UIKit.center_popup(self)
 	custom_minimum_size = Vector2(480, 200)
 	var v := UIKit.vbox(10)
 	add_child(v)

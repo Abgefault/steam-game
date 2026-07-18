@@ -71,12 +71,24 @@ static func title(text: String, size: int = 22) -> Label:
 	return l
 
 
-static func label(text: String, color: Color = TEXT, size: int = 15) -> Label:
+## Autowrap is OFF by default so labels never collapse to one-char columns
+## inside width-starved grids/HBoxes. Pass wrap=true for real paragraphs;
+## those should also live in a width-constrained parent.
+static func label(text: String, color: Color = TEXT, size: int = 15, wrap: bool = false) -> Label:
 	var l := Label.new()
 	l.text = text
 	l.add_theme_color_override("font_color", color)
 	l.add_theme_font_size_override("font_size", size)
-	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	if wrap:
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		l.custom_minimum_size.x = 360
+	return l
+
+
+## A wrapping paragraph label with an explicit width.
+static func paragraph(text: String, color: Color = TEXT_DIM, size: int = 14, width: float = 640.0) -> Label:
+	var l := label(text, color, size, true)
+	l.custom_minimum_size.x = width
 	return l
 
 
@@ -153,6 +165,24 @@ static func grid(cols: int) -> GridContainer:
 	g.add_theme_constant_override("h_separation", 14)
 	g.add_theme_constant_override("v_separation", 6)
 	return g
+
+
+## Reliably center a popup regardless of when its content grows or how big
+## its parent currently is. Anchors top-left, then positions against the
+## viewport once the content size is known (deferred one frame).
+static func center_popup(c: Control) -> void:
+	c.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	_center_deferred.call_deferred(c)
+
+
+static func _center_deferred(c: Control) -> void:
+	if not is_instance_valid(c) or not c.is_inside_tree():
+		return
+	await c.get_tree().process_frame
+	if not is_instance_valid(c) or not c.is_inside_tree():
+		return
+	var vp := c.get_viewport_rect().size
+	c.position = ((vp - c.size) / 2.0).round().max(Vector2.ZERO)
 
 
 static func confirm(parent: Node, text: String, on_yes: Callable) -> void:

@@ -39,6 +39,7 @@ func _ready() -> void:
 	_content = ScrollContainer.new()
 	_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_content.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_content.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	h.add_child(_content)
 	_refresh_timer = Timer.new()
 	_refresh_timer.wait_time = 1.0
@@ -123,7 +124,7 @@ func _page_campaign(v: VBoxContainer) -> void:
 	var s := Game.state
 	v.add_child(UIKit.title("Verdantia City Supply Contract"))
 	v.add_child(UIKit.label("Qualify before day %d, then pass the %d-day supply trial. %d days remain."
-		% [CampaignSim.QUALIFY_BY_DAY, CampaignSim.TRIAL_DAYS, CampaignSim.days_remaining(s)]))
+		% [CampaignSim.QUALIFY_BY_DAY, CampaignSim.TRIAL_DAYS, CampaignSim.days_remaining(s)], UIKit.TEXT, 15, true))
 	v.add_child(UIKit.separator())
 	if s.trial.active:
 		var t := CampaignSim.trial_status(s)
@@ -513,7 +514,7 @@ func _page_stores(v: VBoxContainer) -> void:
 		var panel_content := UIKit.vbox(4)
 		v.add_child(UIKit.panel(panel_content))
 		panel_content.add_child(UIKit.title(str(d.name), 17))
-		panel_content.add_child(UIKit.label(str(d.desc), UIKit.TEXT_DIM, 13))
+		panel_content.add_child(UIKit.label(str(d.desc), UIKit.TEXT_DIM, 13, true))
 		if owned:
 			var st: Dictionary = s.stores[store_id]
 			var row := UIKit.hbox(14)
@@ -600,7 +601,7 @@ func _page_research(v: VBoxContainer) -> void:
 			var id := str(node.id)
 			var done := Game.has_research(id)
 			table.add_child(UIKit.label(str(node.name), UIKit.OK if done else UIKit.TEXT))
-			table.add_child(UIKit.label(str(node.desc), UIKit.TEXT_DIM, 13))
+			table.add_child(UIKit.label(str(node.desc), UIKit.TEXT_DIM, 13, true))
 			var cost_txt := "%d RP" % int(node.cost_rp)
 			if float(node.get("cost_cash", 0)) > 0:
 				cost_txt += " + " + UIKit.money(float(node.cost_cash))
@@ -704,7 +705,7 @@ func _page_events(v: VBoxContainer) -> void:
 		var pc := UIKit.vbox(4)
 		v.add_child(UIKit.panel(pc))
 		pc.add_child(UIKit.title(str(ev.title), 16))
-		pc.add_child(UIKit.label(str(ev.text), UIKit.TEXT_DIM))
+		pc.add_child(UIKit.paragraph(str(ev.text)))
 		if not bool(ev.resolved):
 			var row := UIKit.hbox(8)
 			pc.add_child(row)

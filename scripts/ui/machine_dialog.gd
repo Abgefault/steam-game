@@ -7,7 +7,7 @@ var machine_id: String = ""
 
 func _ready() -> void:
 	theme = UIKit.theme()
-	set_anchors_preset(Control.PRESET_CENTER)
+	UIKit.center_popup(self)
 	custom_minimum_size = Vector2(520, 300)
 	var m: Dictionary = Game.state.machines.get(machine_id, {})
 	if m.is_empty():

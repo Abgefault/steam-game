@@ -54,12 +54,16 @@ func _ready() -> void:
 func _build_top_bar(root: Control) -> void:
 	var panel := PanelContainer.new()
 	panel.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	panel.offset_bottom = 46
 	panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	root.add_child(panel)
-	_top_bar = UIKit.hbox(18)
+	_top_bar = UIKit.hbox(16)
+	_top_bar.alignment = BoxContainer.ALIGNMENT_BEGIN
 	panel.add_child(_top_bar)
 	for key in ["cash", "day", "left", "rep", "comp", "auto", "rp", "stage"]:
 		var l := UIKit.label("", UIKit.TEXT, 15)
+		l.autowrap_mode = TextServer.AUTOWRAP_OFF
+		l.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		_stat_labels[key] = l
 		_top_bar.add_child(l)
 	var spacer := Control.new()
@@ -71,11 +75,14 @@ func _build_top_bar(root: Control) -> void:
 				SimClock.toggle_pause()
 			else:
 				SimClock.set_speed(float(entry[1])))
+		b.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		b.custom_minimum_size.x = 40
 		_speed_buttons[entry[0]] = b
 		_top_bar.add_child(b)
-	_top_bar.add_child(UIKit.button("End Day", _confirm_end_day, "Skip to the end of the day"))
-	_top_bar.add_child(UIKit.button("Tablet (TAB)", toggle_tablet))
-	_top_bar.add_child(UIKit.button("Menu (ESC)", open_pause))
+	for pair in [["End Day", _confirm_end_day], ["Tablet (TAB)", toggle_tablet], ["Menu (ESC)", open_pause]]:
+		var btn := UIKit.button(str(pair[0]), pair[1])
+		btn.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		_top_bar.add_child(btn)
 
 
 func _build_center(root: Control) -> void:
@@ -88,7 +95,8 @@ func _build_center(root: Control) -> void:
 	_prompt.position.y += 40
 	_prompt.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root.add_child(_prompt)
-	_tutorial_label = UIKit.label("", UIKit.WARN, 16)
+	_tutorial_label = UIKit.label("", UIKit.WARN, 16, true)
+	_tutorial_label.custom_minimum_size.x = 700
 	_tutorial_label.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
 	_tutorial_label.position.y -= 90
 	_tutorial_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -109,7 +117,7 @@ func _build_side(root: Control) -> void:
 	left.position = Vector2(14, 52)
 	left.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root.add_child(left)
-	_objective_label = UIKit.label("", UIKit.TEXT_DIM, 14)
+	_objective_label = UIKit.label("", UIKit.TEXT_DIM, 14, true)
 	_objective_label.custom_minimum_size.x = 340
 	left.add_child(_objective_label)
 	_alert_box = UIKit.vbox(4)
@@ -261,17 +269,29 @@ func _on_audit(result: Dictionary) -> void:
 # ------------------------------------------------------------------ dialogs
 
 func _show_dialog(dlg: Control) -> void:
-	_dialog_host.add_child(dlg)
+	var backdrop := ColorRect.new()
+	backdrop.color = Color(0, 0, 0, 0.45)
+	backdrop.set_anchors_preset(Control.PRESET_FULL_RECT)
+	backdrop.mouse_filter = Control.MOUSE_FILTER_STOP
+	_dialog_host.add_child(backdrop)
+	backdrop.add_child(dlg)
 	_lock_player(true)
-	dlg.tree_exited.connect(func(): _maybe_unlock())
+	dlg.tree_exited.connect(func():
+		if is_instance_valid(backdrop):
+			backdrop.queue_free()
+		_maybe_unlock())
 
 
 func _maybe_unlock() -> void:
+	if not is_inside_tree():
+		return
 	if _dialog_host.get_child_count() <= 1 and _tablet == null and _pause_menu == null:
 		_lock_player(false)
 
 
 func _lock_player(locked: bool) -> void:
+	if not is_inside_tree():
+		return
 	var scene := get_tree().current_scene
 	if scene != null and scene.get("player") != null:
 		(scene.player as Player).ui_locked = locked

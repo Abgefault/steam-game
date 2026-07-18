@@ -32,9 +32,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if ui_locked:
 		return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		var motion := event as InputEventMouseMotion
 		var sens := float(SettingsService.get_v("mouse_sensitivity")) * 0.006
-		rotate_y(-event.relative.x * sens)
-		var dy := event.relative.y * sens * (-1.0 if bool(SettingsService.get_v("invert_y")) else 1.0)
+		rotate_y(-motion.relative.x * sens)
+		var dy: float = motion.relative.y * sens * (-1.0 if bool(SettingsService.get_v("invert_y")) else 1.0)
 		_pitch = clampf(_pitch - dy, -1.5, 1.5)
 		camera.rotation.x = _pitch
 	elif event.is_action_pressed("interact"):

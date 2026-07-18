@@ -18,6 +18,10 @@ func _ready() -> void:
 	if "--run-tests" in args:
 		add_child((load("res://tests/run_tests.gd") as GDScript).new())
 		return
+	if "--smoke-world" in args:
+		var runner: Node = (load("res://tools/world_smoke.gd") as GDScript).new()
+		get_tree().root.add_child.call_deferred(runner)
+		return
 	if "--economy-sim" in args:
 		add_child((load("res://tools/economy_sim.gd") as GDScript).new())
 		return

@@ -1,0 +1,22 @@
+GREEN EMPIRE — Windows build
+============================
+
+The playable file GreenEmpire.exe belongs HERE (dist\GreenEmpire\).
+
+It is NOT stored in the Git repository because the file is ~106 MB and GitHub
+rejects any single file over 100 MB. The build is produced fresh from source
+with one command (Godot 4.7.1 with Windows export templates installed):
+
+    godot --headless --export-release "Windows Desktop" dist/GreenEmpire/GreenEmpire.exe
+
+The result is a single self-contained executable (game data embedded, no
+console window, application icon and version metadata set). Double-click it to
+play — no installation, Godot, Python, or terminal required.
+
+This exact build was produced and smoke-tested during development:
+  - launches to the main menu,
+  - New Game starts a playable campaign,
+  - save / load round-trips,
+  - the automated test suite passes against the exported binary.
+
+See ../../README.md ("How to Play") and ../../docs/RELEASE_CHECKLIST.md.

@@ -4,7 +4,7 @@ extends PanelContainer
 
 func _ready() -> void:
 	theme = UIKit.theme()
-	set_anchors_preset(Control.PRESET_CENTER)
+	UIKit.center_popup(self)
 	custom_minimum_size = Vector2(620, 520)
 	var scroll := ScrollContainer.new()
 	scroll.custom_minimum_size = Vector2(600, 500)

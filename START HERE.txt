@@ -1,0 +1,7 @@
+GREEN EMPIRE: Industrial Cannabis Tycoon
+=========================================
+
+TO PLAY:  open the folder  dist\GreenEmpire\  and double-click  GreenEmpire.exe
+
+No installation, Godot, Python, or terminal is required.
+See README.md for controls and details.

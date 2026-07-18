@@ -8,8 +8,7 @@ func _ready() -> void:
 		queue_free()
 		return
 	theme = UIKit.theme()
-	set_anchors_preset(Control.PRESET_CENTER_LEFT)
-	position.x += 20
+	UIKit.center_popup(self)
 	custom_minimum_size = Vector2(300, 400)
 	var v := UIKit.vbox(6)
 	add_child(v)
