@@ -1,0 +1,22 @@
+{
+ "start_cash": 12000,
+ "loan_principal": 45000,
+ "loan_payment": 950,
+ "overdraft_limit": -15000,
+ "start_reputation": 35,
+ "start_compliance": 60,
+ "facility_rent": 220,
+ "tax_rate": 0.12,
+ "base_wage": 90,
+ "hiring_fee": 150,
+ "price_seed_unit": 120,
+ "price_packaging_unit": 1.2,
+ "price_spare_part": 160,
+ "machine_wear_per_hour": 1.1,
+ "customer_base_rate": 0.11,
+ "event_daily_chance": 0.4,
+ "audit_fine": 1500,
+ "rp_profit_threshold": 400,
+ "store_goodwill": 90000,
+ "trial_unit_price": 9.5
+}

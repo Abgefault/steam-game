@@ -1,0 +1,390 @@
+{
+ "research": [
+  {
+   "id": "fast_processing",
+   "name": "Streamlined Processing",
+   "branch": "production",
+   "cost_rp": 2,
+   "cost_cash": 0,
+   "desc": "All machines run 15% faster.",
+   "requires": [],
+   "stage": 1
+  },
+  {
+   "id": "quality_consistency",
+   "name": "Quality Consistency",
+   "branch": "production",
+   "cost_rp": 3,
+   "cost_cash": 0,
+   "desc": "Batches roll higher, steadier quality.",
+   "requires": [
+    "fast_processing"
+   ],
+   "stage": 1
+  },
+  {
+   "id": "durable_parts",
+   "name": "Durable Components",
+   "branch": "production",
+   "cost_rp": 3,
+   "cost_cash": 0,
+   "desc": "Machines wear 40% slower.",
+   "requires": [
+    "fast_processing"
+   ],
+   "stage": 1
+  },
+  {
+   "id": "large_buffers",
+   "name": "Extended Buffers",
+   "branch": "production",
+   "cost_rp": 4,
+   "cost_cash": 0,
+   "desc": "Machines hold larger input/output buffers.",
+   "requires": [
+    "durable_parts"
+   ],
+   "stage": 2
+  },
+  {
+   "id": "lab_protocols",
+   "name": "Laboratory Protocols",
+   "branch": "production",
+   "cost_rp": 4,
+   "cost_cash": 0,
+   "desc": "Lab testing is faster and grants the testing license.",
+   "requires": [
+    "quality_consistency"
+   ],
+   "stage": 2
+  },
+  {
+   "id": "efficient_power",
+   "name": "Efficient Power Systems",
+   "branch": "production",
+   "cost_rp": 5,
+   "cost_cash": 0,
+   "desc": "Machinery consumes less power.",
+   "requires": [
+    "large_buffers"
+   ],
+   "stage": 3
+  },
+  {
+   "id": "pilot_lines",
+   "name": "Pilot Production Lines",
+   "branch": "production",
+   "cost_rp": 6,
+   "cost_cash": 0,
+   "desc": "Unlocks Tier 4+ machine upgrades.",
+   "requires": [
+    "efficient_power"
+   ],
+   "stage": 4
+  },
+  {
+   "id": "conveyors",
+   "name": "Conveyor Systems",
+   "branch": "automation",
+   "cost_rp": 3,
+   "cost_cash": 2000,
+   "desc": "Build conveyors that move outputs between machines automatically.",
+   "requires": [],
+   "stage": 2
+  },
+  {
+   "id": "belt_filters",
+   "name": "Belt Filters & Splitters",
+   "branch": "automation",
+   "cost_rp": 4,
+   "cost_cash": 0,
+   "desc": "Conveyor routing rules by product and quality.",
+   "requires": [
+    "conveyors"
+   ],
+   "stage": 3
+  },
+  {
+   "id": "robotic_arms",
+   "name": "Robotic Transfer Arms",
+   "branch": "automation",
+   "cost_rp": 5,
+   "cost_cash": 0,
+   "desc": "Machines auto-feed from connected buffers.",
+   "requires": [
+    "belt_filters"
+   ],
+   "stage": 3
+  },
+  {
+   "id": "auto_labeling",
+   "name": "Automatic Labeling",
+   "branch": "automation",
+   "cost_rp": 4,
+   "cost_cash": 0,
+   "desc": "Packaging machines label without manual work.",
+   "requires": [
+    "conveyors"
+   ],
+   "stage": 3
+  },
+  {
+   "id": "asrs",
+   "name": "Automated Storage & Retrieval",
+   "branch": "automation",
+   "cost_rp": 6,
+   "cost_cash": 0,
+   "desc": "Warehouse racks store and pick lots automatically.",
+   "requires": [
+    "robotic_arms"
+   ],
+   "stage": 4
+  },
+  {
+   "id": "central_scheduling",
+   "name": "Central Production Scheduling",
+   "branch": "automation",
+   "cost_rp": 6,
+   "cost_cash": 0,
+   "desc": "A planning terminal schedules production automatically.",
+   "requires": [
+    "asrs"
+   ],
+   "stage": 4
+  },
+  {
+   "id": "predictive_maintenance",
+   "name": "Predictive Maintenance",
+   "branch": "automation",
+   "cost_rp": 7,
+   "cost_cash": 0,
+   "desc": "Machines report wear before failing.",
+   "requires": [
+    "central_scheduling"
+   ],
+   "stage": 5
+  },
+  {
+   "id": "staff_training",
+   "name": "Staff Training Program",
+   "branch": "retail",
+   "cost_rp": 2,
+   "cost_cash": 0,
+   "desc": "New hires start more skilled; XP gain doubled.",
+   "requires": [],
+   "stage": 1
+  },
+  {
+   "id": "loyalty_program",
+   "name": "Loyalty Program",
+   "branch": "retail",
+   "cost_rp": 4,
+   "cost_cash": 0,
+   "desc": "Happy customers become regulars twice as often.",
+   "requires": [
+    "staff_training"
+   ],
+   "stage": 2
+  },
+  {
+   "id": "premium_displays",
+   "name": "Premium Display Cases",
+   "branch": "retail",
+   "cost_rp": 4,
+   "cost_cash": 0,
+   "desc": "Store appeal rises; premium products sell better.",
+   "requires": [
+    "staff_training"
+   ],
+   "stage": 2
+  },
+  {
+   "id": "remote_store_mgmt",
+   "name": "Remote Store Management",
+   "branch": "retail",
+   "cost_rp": 5,
+   "cost_cash": 0,
+   "desc": "Store managers run day-to-day operations remotely.",
+   "requires": [
+    "loyalty_program"
+   ],
+   "stage": 3
+  },
+  {
+   "id": "auto_replenishment",
+   "name": "Automatic Replenishment",
+   "branch": "retail",
+   "cost_rp": 5,
+   "cost_cash": 0,
+   "desc": "Stores restock from the warehouse automatically.",
+   "requires": [
+    "remote_store_mgmt"
+   ],
+   "stage": 3
+  },
+  {
+   "id": "brand_studio",
+   "name": "In-House Brand Studio",
+   "branch": "retail",
+   "cost_rp": 6,
+   "cost_cash": 0,
+   "desc": "Marketing campaigns cost less and reach further.",
+   "requires": [
+    "premium_displays"
+   ],
+   "stage": 4
+  },
+  {
+   "id": "route_planning",
+   "name": "Route Planning",
+   "branch": "logistics",
+   "cost_rp": 2,
+   "cost_cash": 0,
+   "desc": "Transfers between locations are cheaper.",
+   "requires": [],
+   "stage": 1
+  },
+  {
+   "id": "fleet_upgrade",
+   "name": "Fleet Upgrade",
+   "branch": "logistics",
+   "cost_rp": 4,
+   "cost_cash": 0,
+   "desc": "Bigger vans: transfer capacity doubles.",
+   "requires": [
+    "route_planning"
+   ],
+   "stage": 2
+  },
+  {
+   "id": "auto_purchasing",
+   "name": "Scheduled Supplier Purchasing",
+   "branch": "logistics",
+   "cost_rp": 4,
+   "cost_cash": 0,
+   "desc": "Supplies reorder themselves below thresholds.",
+   "requires": [
+    "route_planning"
+   ],
+   "stage": 2
+  },
+  {
+   "id": "demand_forecasting",
+   "name": "Demand Forecasting",
+   "branch": "logistics",
+   "cost_rp": 6,
+   "cost_cash": 0,
+   "desc": "Market screen predicts demand; smarter auto-restock.",
+   "requires": [
+    "auto_purchasing"
+   ],
+   "stage": 4
+  },
+  {
+   "id": "cold_chain",
+   "name": "Cold Chain Logistics",
+   "branch": "logistics",
+   "cost_rp": 5,
+   "cost_cash": 0,
+   "desc": "Shelf life of delivered goods +25%.",
+   "requires": [
+    "fleet_upgrade"
+   ],
+   "stage": 3
+  },
+  {
+   "id": "wholesale_license",
+   "name": "Wholesale Operations",
+   "branch": "logistics",
+   "cost_rp": 5,
+   "cost_cash": 0,
+   "desc": "Unlocks the logistics license and wholesale orders.",
+   "requires": [
+    "fleet_upgrade"
+   ],
+   "stage": 3
+  },
+  {
+   "id": "compliance_office",
+   "name": "Compliance Office",
+   "branch": "brand",
+   "cost_rp": 3,
+   "cost_cash": 0,
+   "desc": "Compliance drifts upward; audit prep is easier.",
+   "requires": [],
+   "stage": 1
+  },
+  {
+   "id": "audit_prep",
+   "name": "Audit Preparation Kits",
+   "branch": "brand",
+   "cost_rp": 4,
+   "cost_cash": 0,
+   "desc": "Scheduled audits score one category higher.",
+   "requires": [
+    "compliance_office"
+   ],
+   "stage": 2
+  },
+  {
+   "id": "premium_packaging",
+   "name": "Premium Packaging",
+   "branch": "brand",
+   "cost_rp": 4,
+   "cost_cash": 0,
+   "desc": "Label accuracy is guaranteed; brand appeal up.",
+   "requires": [
+    "compliance_office"
+   ],
+   "stage": 2
+  },
+  {
+   "id": "shelf_life_tech",
+   "name": "Modified Atmosphere Packs",
+   "branch": "brand",
+   "cost_rp": 5,
+   "cost_cash": 0,
+   "desc": "All product shelf life +20%.",
+   "requires": [
+    "premium_packaging"
+   ],
+   "stage": 3
+  },
+  {
+   "id": "advanced_analytics",
+   "name": "Advanced Analytics Suite",
+   "branch": "brand",
+   "cost_rp": 6,
+   "cost_cash": 0,
+   "desc": "Financial reporting runs itself; deep dashboards.",
+   "requires": [
+    "audit_prep"
+   ],
+   "stage": 4
+  },
+  {
+   "id": "maintenance_scheduling",
+   "name": "Maintenance Scheduling",
+   "branch": "brand",
+   "cost_rp": 4,
+   "cost_cash": 0,
+   "desc": "Enable automatic maintenance policies.",
+   "requires": [
+    "compliance_office"
+   ],
+   "stage": 2
+  },
+  {
+   "id": "city_relations",
+   "name": "City Relations Office",
+   "branch": "brand",
+   "cost_rp": 7,
+   "cost_cash": 0,
+   "desc": "Reputation floor raised; inspectors are friendlier.",
+   "requires": [
+    "advanced_analytics"
+   ],
+   "stage": 5
+  }
+ ]
+}

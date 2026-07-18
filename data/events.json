@@ -1,0 +1,745 @@
+{
+ "events": [
+  {
+   "id": "influencer",
+   "title": "Influencer Recommendation",
+   "text": "A city influencer posted about your store. Foot traffic surges for two days.",
+   "duration": 2,
+   "cooldown": 30,
+   "requires": {
+    "min_day": 5
+   },
+   "effects": {
+    "traffic_mult": 1.5,
+    "reputation": 3
+   },
+   "choices": []
+  },
+  {
+   "id": "viral_negative",
+   "title": "Viral Negative Review",
+   "text": "A harsh review is trending. Respond publicly or ride it out?",
+   "duration": 2,
+   "cooldown": 35,
+   "requires": {
+    "min_day": 8
+   },
+   "effects": {},
+   "choices": [
+    {
+     "label": "Public apology + free samples ($800)",
+     "cost": 800,
+     "effects": {
+      "reputation": 4
+     }
+    },
+    {
+     "label": "Ignore it",
+     "effects": {
+      "reputation": -6,
+      "traffic_mult": 0.85
+     }
+    }
+   ]
+  },
+  {
+   "id": "festival",
+   "title": "Festival Weekend",
+   "text": "The city festival floods the streets. All districts see more shoppers.",
+   "duration": 3,
+   "cooldown": 28,
+   "requires": {
+    "min_day": 10
+   },
+   "effects": {
+    "traffic_mult": 1.4
+   },
+   "choices": []
+  },
+  {
+   "id": "exams",
+   "title": "University Exams",
+   "text": "Exam season empties University Row but boosts calm wellness products.",
+   "duration": 4,
+   "cooldown": 30,
+   "requires": {
+    "min_day": 12
+   },
+   "effects": {
+    "category_demand": {
+     "wellness": 1.3,
+     "preroll": 0.8
+    }
+   },
+   "choices": []
+  },
+  {
+   "id": "wellness_conv",
+   "title": "Wellness Convention",
+   "text": "A wellness convention is in town. Wellness Heights demand spikes.",
+   "duration": 3,
+   "cooldown": 30,
+   "requires": {
+    "min_day": 15
+   },
+   "effects": {
+    "category_demand": {
+     "wellness": 1.5,
+     "oil": 1.3
+    }
+   },
+   "choices": []
+  },
+  {
+   "id": "supplier_shortage",
+   "title": "Supplier Shortage",
+   "text": "A supplier cooperative reports shortages. Input prices climb this week.",
+   "duration": 4,
+   "cooldown": 26,
+   "requires": {},
+   "effects": {
+    "supplier_price_mult": 1.5
+   },
+   "choices": []
+  },
+  {
+   "id": "packaging_rules",
+   "title": "Packaging Rule Update",
+   "text": "The city updated packaging rules. Adapt immediately or risk compliance.",
+   "duration": 1,
+   "cooldown": 40,
+   "requires": {
+    "min_day": 20
+   },
+   "effects": {},
+   "choices": [
+    {
+     "label": "Retool packaging ($1,200)",
+     "cost": 1200,
+     "effects": {
+      "compliance": 6
+     }
+    },
+    {
+     "label": "Delay adaptation",
+     "effects": {
+      "compliance": -8
+     }
+    }
+   ]
+  },
+  {
+   "id": "utility_surge",
+   "title": "Utility Price Surge",
+   "text": "Energy prices spike citywide. Utilities cost more for a few days.",
+   "duration": 3,
+   "cooldown": 24,
+   "requires": {},
+   "effects": {
+    "utility_mult": 1.6
+   },
+   "choices": []
+  },
+  {
+   "id": "competitor_discount",
+   "title": "Competitor Discount Campaign",
+   "text": "A rival chain slashes prices. Price-sensitive customers wander off.",
+   "duration": 3,
+   "cooldown": 26,
+   "requires": {
+    "min_day": 14
+   },
+   "effects": {
+    "traffic_mult": 0.85
+   },
+   "choices": []
+  },
+  {
+   "id": "recall",
+   "title": "Product Recall Scare",
+   "text": "A supplier upstream issued a recall. Prove your lot tracking is clean.",
+   "duration": 1,
+   "cooldown": 45,
+   "requires": {
+    "min_day": 25
+   },
+   "effects": {
+    "audit": true
+   },
+   "choices": []
+  },
+  {
+   "id": "staff_illness",
+   "title": "Staff Illness Wave",
+   "text": "A cold wave hits the team. Morale and energy dip.",
+   "duration": 2,
+   "cooldown": 22,
+   "requires": {
+    "min_staff": 2
+   },
+   "effects": {
+    "staff_morale": -8
+   },
+   "choices": []
+  },
+  {
+   "id": "equipment_failure",
+   "title": "Equipment Failure",
+   "text": "A power spike damaged a machine on the floor.",
+   "duration": 1,
+   "cooldown": 20,
+   "requires": {
+    "min_day": 6
+   },
+   "effects": {
+    "damage_machine": 30
+   },
+   "choices": []
+  },
+  {
+   "id": "surprise_audit",
+   "title": "Surprise Audit",
+   "text": "City inspectors walked in unannounced.",
+   "duration": 1,
+   "cooldown": 35,
+   "requires": {
+    "min_day": 18
+   },
+   "effects": {
+    "audit": true
+   },
+   "choices": []
+  },
+  {
+   "id": "tourism_boom",
+   "title": "Tourism Boom",
+   "text": "A travel magazine featured Verdantia. Tourists everywhere.",
+   "duration": 4,
+   "cooldown": 30,
+   "requires": {
+    "min_day": 20
+   },
+   "effects": {
+    "traffic_mult": 1.3,
+    "category_demand": {
+     "limited": 1.4
+    }
+   },
+   "choices": []
+  },
+  {
+   "id": "construction",
+   "title": "District Construction",
+   "text": "Roadworks choke a district. Deliveries and foot traffic slow down.",
+   "duration": 4,
+   "cooldown": 28,
+   "requires": {
+    "min_day": 16
+   },
+   "effects": {
+    "traffic_mult": 0.8
+   },
+   "choices": []
+  },
+  {
+   "id": "charity",
+   "title": "Charity Opportunity",
+   "text": "The Verdantia Youth Fund asks for a sponsorship.",
+   "duration": 1,
+   "cooldown": 40,
+   "requires": {
+    "min_day": 10
+   },
+   "effects": {},
+   "choices": [
+    {
+     "label": "Donate $2,000",
+     "cost": 2000,
+     "effects": {
+      "reputation": 8
+     }
+    },
+    {
+     "label": "Politely decline",
+     "effects": {
+      "reputation": -1
+     }
+    }
+   ]
+  },
+  {
+   "id": "input_auction",
+   "title": "Limited Input Auction",
+   "text": "A rare lot of Northern Glass inputs is on auction.",
+   "duration": 1,
+   "cooldown": 35,
+   "requires": {
+    "min_stage": 3
+   },
+   "effects": {},
+   "choices": [
+    {
+     "label": "Bid $3,000",
+     "cost": 3000,
+     "effects": {
+      "research_points": 1,
+      "cash": 0
+     }
+    },
+    {
+     "label": "Skip the auction",
+     "effects": {}
+    }
+   ]
+  },
+  {
+   "id": "landlord",
+   "title": "Landlord Negotiation",
+   "text": "Your landlord offers a deal: prepay rent for a discount.",
+   "duration": 1,
+   "cooldown": 45,
+   "requires": {
+    "min_day": 30
+   },
+   "effects": {},
+   "choices": [
+    {
+     "label": "Prepay $2,500 now",
+     "cost": 2500,
+     "effects": {
+      "cash": 500
+     }
+    },
+    {
+     "label": "Keep monthly terms",
+     "effects": {}
+    }
+   ]
+  },
+  {
+   "id": "data_outage",
+   "title": "Data-System Outage",
+   "text": "The city data network hiccups. Remote systems fall back to local mode.",
+   "duration": 1,
+   "cooldown": 30,
+   "requires": {
+    "min_stage": 3
+   },
+   "effects": {
+    "traffic_mult": 0.95
+   },
+   "choices": []
+  },
+  {
+   "id": "delivery_delay",
+   "title": "Delivery Delay",
+   "text": "A highway closure delays supplier deliveries this week.",
+   "duration": 3,
+   "cooldown": 25,
+   "requires": {},
+   "effects": {
+    "supplier_price_mult": 1.25
+   },
+   "choices": []
+  },
+  {
+   "id": "heat_wave",
+   "title": "Heat Wave",
+   "text": "A heat wave rolls in: beverages boom, machines strain.",
+   "duration": 3,
+   "cooldown": 30,
+   "requires": {},
+   "effects": {
+    "category_demand": {
+     "beverage": 1.5
+    },
+    "utility_mult": 1.3
+   },
+   "choices": []
+  },
+  {
+   "id": "employee_dispute",
+   "title": "Employee Dispute",
+   "text": "Two team members clash over shift priorities.",
+   "duration": 1,
+   "cooldown": 25,
+   "requires": {
+    "min_staff": 3
+   },
+   "effects": {},
+   "choices": [
+    {
+     "label": "Mediate personally (morale +)",
+     "effects": {
+      "staff_morale": 6
+     }
+    },
+    {
+     "label": "Let them sort it out",
+     "effects": {
+      "staff_morale": -6
+     }
+    }
+   ]
+  },
+  {
+   "id": "investor",
+   "title": "Investor Offer",
+   "text": "An investor offers quick cash for a slice of future goodwill.",
+   "duration": 1,
+   "cooldown": 60,
+   "requires": {
+    "min_stage": 3
+   },
+   "effects": {},
+   "choices": [
+    {
+     "label": "Accept $15,000 (reputation -5)",
+     "effects": {
+      "cash": 15000,
+      "reputation": -5
+     }
+    },
+    {
+     "label": "Stay independent (reputation +2)",
+     "effects": {
+      "reputation": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "sustain_grant",
+   "title": "Sustainability Grant",
+   "text": "The city grants efficient operators a sustainability bonus.",
+   "duration": 1,
+   "cooldown": 50,
+   "requires": {
+    "min_stage": 2
+   },
+   "effects": {
+    "cash": 4000,
+    "reputation": 3
+   },
+   "choices": []
+  },
+  {
+   "id": "new_competitor",
+   "title": "New Competitor Opening",
+   "text": "A flashy competitor opened across town.",
+   "duration": 5,
+   "cooldown": 40,
+   "requires": {
+    "min_day": 35
+   },
+   "effects": {
+    "traffic_mult": 0.9
+   },
+   "choices": []
+  },
+  {
+   "id": "news_interview",
+   "title": "Local News Interview",
+   "text": "A journalist wants a tour of your facility.",
+   "duration": 1,
+   "cooldown": 45,
+   "requires": {
+    "min_stage": 2
+   },
+   "effects": {},
+   "choices": [
+    {
+     "label": "Give the tour",
+     "effects": {
+      "reputation": 5,
+      "audit": true
+     }
+    },
+    {
+     "label": "Decline politely",
+     "effects": {}
+    }
+   ]
+  },
+  {
+   "id": "rain_week",
+   "title": "Grey Rain Week",
+   "text": "A week of drizzle keeps casual shoppers home.",
+   "duration": 4,
+   "cooldown": 26,
+   "requires": {},
+   "effects": {
+    "traffic_mult": 0.88
+   },
+   "choices": []
+  },
+  {
+   "id": "food_fair",
+   "title": "Street Food Fair",
+   "text": "A food fair beside Old Market spills hungry crowds into your store.",
+   "duration": 2,
+   "cooldown": 30,
+   "requires": {},
+   "effects": {
+    "category_demand": {
+     "edible": 1.4,
+     "beverage": 1.2
+    }
+   },
+   "choices": []
+  },
+  {
+   "id": "marathon",
+   "title": "City Marathon",
+   "text": "Marathon day: wellness products surge, roads close.",
+   "duration": 1,
+   "cooldown": 40,
+   "requires": {
+    "min_day": 22
+   },
+   "effects": {
+    "category_demand": {
+     "wellness": 1.6
+    },
+    "traffic_mult": 0.9
+   },
+   "choices": []
+  },
+  {
+   "id": "art_opening",
+   "title": "Gallery Opening Night",
+   "text": "The Arts Quarter celebrates. Limited editions are the ticket.",
+   "duration": 1,
+   "cooldown": 30,
+   "requires": {
+    "min_day": 18
+   },
+   "effects": {
+    "category_demand": {
+     "limited": 1.8
+    }
+   },
+   "choices": []
+  },
+  {
+   "id": "power_deal",
+   "title": "Green Power Deal",
+   "text": "A co-op offers discounted clean power for a signup fee.",
+   "duration": 1,
+   "cooldown": 60,
+   "requires": {
+    "min_stage": 2
+   },
+   "effects": {},
+   "choices": [
+    {
+     "label": "Sign up ($1,500)",
+     "cost": 1500,
+     "effects": {
+      "utility_mult": 0.7
+     }
+    },
+    {
+     "label": "Pass",
+     "effects": {}
+    }
+   ]
+  },
+  {
+   "id": "bulk_seed_offer",
+   "title": "Bulk Input Offer",
+   "text": "A supplier clears warehouse space: discounted seed kits today.",
+   "duration": 1,
+   "cooldown": 30,
+   "requires": {},
+   "effects": {},
+   "choices": [
+    {
+     "label": "Buy 4 kits ($350)",
+     "cost": 350,
+     "effects": {}
+    },
+    {
+     "label": "Decline",
+     "effects": {}
+    }
+   ]
+  },
+  {
+   "id": "mystery_shopper",
+   "title": "Mystery Shopper",
+   "text": "The retail association sent a mystery shopper. Results go public.",
+   "duration": 1,
+   "cooldown": 35,
+   "requires": {
+    "min_day": 15
+   },
+   "effects": {
+    "reputation": 2
+   },
+   "choices": []
+  },
+  {
+   "id": "printing_error",
+   "title": "Label Printing Error",
+   "text": "A misprint batch slipped through. Fix labels before inspectors notice.",
+   "duration": 1,
+   "cooldown": 35,
+   "requires": {
+    "min_day": 20
+   },
+   "effects": {},
+   "choices": [
+    {
+     "label": "Relabel stock ($600)",
+     "cost": 600,
+     "effects": {
+      "compliance": 3
+     }
+    },
+    {
+     "label": "Risk it",
+     "effects": {
+      "compliance": -7
+     }
+    }
+   ]
+  },
+  {
+   "id": "radio_feature",
+   "title": "Radio Feature",
+   "text": "A local radio host praised your storefront rebrand.",
+   "duration": 2,
+   "cooldown": 35,
+   "requires": {
+    "min_stage": 2
+   },
+   "effects": {
+    "reputation": 4,
+    "traffic_mult": 1.15
+   },
+   "choices": []
+  },
+  {
+   "id": "cold_snap",
+   "title": "Cold Snap",
+   "text": "Freezing days push customers toward teas and edibles.",
+   "duration": 3,
+   "cooldown": 28,
+   "requires": {},
+   "effects": {
+    "category_demand": {
+     "beverage": 1.35,
+     "edible": 1.2
+    }
+   },
+   "choices": []
+  },
+  {
+   "id": "supplier_bonus",
+   "title": "Supplier Loyalty Bonus",
+   "text": "Your steady orders earned a supplier credit.",
+   "duration": 1,
+   "cooldown": 45,
+   "requires": {
+    "min_day": 30
+   },
+   "effects": {
+    "cash": 1200
+   },
+   "choices": []
+  },
+  {
+   "id": "intern_program",
+   "title": "Intern Program",
+   "text": "The university proposes an intern program.",
+   "duration": 1,
+   "cooldown": 60,
+   "requires": {
+    "min_stage": 3
+   },
+   "effects": {},
+   "choices": [
+    {
+     "label": "Host interns ($500)",
+     "cost": 500,
+     "effects": {
+      "research_points": 2
+     }
+    },
+    {
+     "label": "Decline",
+     "effects": {}
+    }
+   ]
+  },
+  {
+   "id": "night_market",
+   "title": "Night Market License",
+   "text": "Verdantia trials night markets. Extended hours, extra staff strain.",
+   "duration": 2,
+   "cooldown": 45,
+   "requires": {
+    "min_stage": 3
+   },
+   "effects": {
+    "traffic_mult": 1.25,
+    "staff_morale": -4
+   },
+   "choices": []
+  },
+  {
+   "id": "tax_rebate",
+   "title": "Efficiency Tax Rebate",
+   "text": "The city rebates part of your taxes for efficient operation.",
+   "duration": 1,
+   "cooldown": 55,
+   "requires": {
+    "min_stage": 4
+   },
+   "effects": {
+    "cash": 6000
+   },
+   "choices": []
+  },
+  {
+   "id": "blackout",
+   "title": "Rolling Blackout",
+   "text": "A rolling blackout stalls part of the grid for a day.",
+   "duration": 1,
+   "cooldown": 40,
+   "requires": {
+    "min_day": 28
+   },
+   "effects": {
+    "utility_mult": 1.8,
+    "damage_machine": 15
+   },
+   "choices": []
+  },
+  {
+   "id": "street_art",
+   "title": "Street Art Collab",
+   "text": "A famous muralist offers to paint your storefront.",
+   "duration": 1,
+   "cooldown": 60,
+   "requires": {
+    "min_stage": 2
+   },
+   "effects": {},
+   "choices": [
+    {
+     "label": "Commission mural ($1,800)",
+     "cost": 1800,
+     "effects": {
+      "reputation": 6
+     }
+    },
+    {
+     "label": "Decline",
+     "effects": {}
+    }
+   ]
+  }
+ ]
+}

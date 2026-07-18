@@ -1,0 +1,100 @@
+{
+ "districts": [
+  {
+   "id": "old_market",
+   "name": "Old Market",
+   "rent": 180,
+   "traffic": 0.55,
+   "store_cost": 0,
+   "season_phase": 0.0,
+   "desc": "Low rent, balanced traffic, price-sensitive starting customers.",
+   "archetype_weights": {
+    "budget": 3,
+    "newcomer": 2,
+    "regular": 2,
+    "tourist": 1,
+    "professional": 1,
+    "wellness": 0.5,
+    "enthusiast": 0.5,
+    "trend": 0.5
+   }
+  },
+  {
+   "id": "university_row",
+   "name": "University Row",
+   "rent": 320,
+   "traffic": 0.85,
+   "store_cost": 55000,
+   "season_phase": 1.6,
+   "desc": "High foot traffic, affordable-product demand, low queue tolerance.",
+   "archetype_weights": {
+    "budget": 3,
+    "newcomer": 3,
+    "trend": 2,
+    "tourist": 1,
+    "regular": 1,
+    "professional": 0.5,
+    "wellness": 0.5,
+    "enthusiast": 1
+   }
+  },
+  {
+   "id": "wellness_heights",
+   "name": "Wellness Heights",
+   "rent": 650,
+   "traffic": 0.5,
+   "store_cost": 95000,
+   "season_phase": 3.1,
+   "desc": "Wealthy wellness customers, high quality expectations, expensive rent.",
+   "archetype_weights": {
+    "wellness": 4,
+    "professional": 2,
+    "premiumseeker": 0,
+    "regular": 1,
+    "newcomer": 1,
+    "enthusiast": 0.5,
+    "budget": 0.3,
+    "trend": 0.7,
+    "tourist": 0.5
+   }
+  },
+  {
+   "id": "arts_quarter",
+   "name": "Arts Quarter",
+   "rent": 420,
+   "traffic": 0.7,
+   "store_cost": 75000,
+   "season_phase": 4.4,
+   "desc": "Trend-driven customers, strong branding response, volatile demand.",
+   "archetype_weights": {
+    "trend": 4,
+    "enthusiast": 2,
+    "tourist": 2,
+    "newcomer": 1,
+    "budget": 1,
+    "regular": 1,
+    "wellness": 1,
+    "professional": 0.5
+   }
+  },
+  {
+   "id": "financial_center",
+   "name": "Financial Center",
+   "rent": 900,
+   "traffic": 0.6,
+   "store_cost": 140000,
+   "season_phase": 5.5,
+   "desc": "Premium demand, time-sensitive customers, highest rent, strictest inspections.",
+   "archetype_weights": {
+    "professional": 4,
+    "enthusiast": 1.5,
+    "wellness": 1.5,
+    "regular": 1,
+    "tourist": 0.5,
+    "trend": 0.5,
+    "budget": 0.2,
+    "newcomer": 0.5
+   }
+  }
+ ]
+}

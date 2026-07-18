@@ -1,0 +1,736 @@
+{
+ "objectives": [
+  {
+   "id": "tut_move",
+   "name": "Find Your Feet",
+   "kind": "tutorial",
+   "desc": "Walk through the facility (WASD, mouse to look).",
+   "condition": {
+    "day": 1
+   },
+   "rewards": {}
+  },
+  {
+   "id": "tut_tablet",
+   "name": "Open the Tablet",
+   "kind": "tutorial",
+   "desc": "Press TAB and skim the Company Overview.",
+   "condition": {
+    "tutorial_done": 0
+   },
+   "rewards": {}
+  },
+  {
+   "id": "tut_batch",
+   "name": "First Batch",
+   "kind": "tutorial",
+   "desc": "Load and start the Cultivation Module.",
+   "condition": {
+    "batches_completed": 0
+   },
+   "rewards": {}
+  },
+  {
+   "id": "tut_condition",
+   "name": "Condition the Harvest",
+   "kind": "tutorial",
+   "desc": "Run harvest containers through the Conditioning Unit.",
+   "condition": {
+    "batches_completed": 0
+   },
+   "rewards": {}
+  },
+  {
+   "id": "tut_lab",
+   "name": "Test It",
+   "kind": "tutorial",
+   "desc": "Test a batch in the Quality Laboratory.",
+   "condition": {
+    "lot_count": 1
+   },
+   "rewards": {}
+  },
+  {
+   "id": "tut_package",
+   "name": "Package It",
+   "kind": "tutorial",
+   "desc": "Package a tested batch into a finished lot.",
+   "condition": {
+    "lot_count": 1
+   },
+   "rewards": {}
+  },
+  {
+   "id": "tut_stock",
+   "name": "Stock the Shelf",
+   "kind": "tutorial",
+   "desc": "Move packaged product onto the store display.",
+   "condition": {
+    "units_sold": 1
+   },
+   "rewards": {}
+  },
+  {
+   "id": "tut_price",
+   "name": "Set a Price",
+   "kind": "tutorial",
+   "desc": "Review pricing on the tablet's Products page.",
+   "condition": {
+    "units_sold": 1
+   },
+   "rewards": {}
+  },
+  {
+   "id": "tut_open",
+   "name": "Open the Store",
+   "kind": "tutorial",
+   "desc": "Open your storefront to customers.",
+   "condition": {
+    "customers_served": 1
+   },
+   "rewards": {}
+  },
+  {
+   "id": "tut_sale",
+   "name": "First Sale",
+   "kind": "tutorial",
+   "desc": "Sell your first product.",
+   "condition": {
+    "units_sold": 1
+   },
+   "rewards": {
+    "cash": 200
+   }
+  },
+  {
+   "id": "tut_report",
+   "name": "Read the Daily Report",
+   "kind": "tutorial",
+   "desc": "Finish a day and read the report.",
+   "condition": {
+    "day": 2
+   },
+   "rewards": {}
+  },
+  {
+   "id": "tut_hire",
+   "name": "First Hire",
+   "kind": "tutorial",
+   "desc": "Hire your first employee.",
+   "condition": {
+    "staff_count": 1
+   },
+   "rewards": {
+    "research_points": 1
+   }
+  },
+  {
+   "id": "tut_save",
+   "name": "Safety First",
+   "kind": "tutorial",
+   "desc": "Save the game (F5 quicksaves).",
+   "condition": {
+    "day": 2
+   },
+   "rewards": {}
+  },
+  {
+   "id": "obj_first_1k",
+   "name": "Pocket Money",
+   "kind": "regular",
+   "desc": "Hold $13,000 cash.",
+   "condition": {
+    "cash": 13000
+   },
+   "rewards": {
+    "research_points": 1
+   }
+  },
+  {
+   "id": "obj_sell_50",
+   "name": "Fifty Sales",
+   "kind": "regular",
+   "desc": "Sell 50 units.",
+   "condition": {
+    "units_sold": 50
+   },
+   "rewards": {
+    "cash": 500
+   }
+  },
+  {
+   "id": "obj_sell_250",
+   "name": "Steady Trade",
+   "kind": "regular",
+   "desc": "Sell 250 units.",
+   "condition": {
+    "units_sold": 250
+   },
+   "rewards": {
+    "research_points": 2
+   }
+  },
+  {
+   "id": "obj_sell_1000",
+   "name": "Volume Dealer",
+   "kind": "regular",
+   "desc": "Sell 1,000 units.",
+   "condition": {
+    "units_sold": 1000
+   },
+   "rewards": {
+    "research_points": 3
+   }
+  },
+  {
+   "id": "obj_batch_5",
+   "name": "Production Rhythm",
+   "kind": "regular",
+   "desc": "Complete 5 batches.",
+   "condition": {
+    "batches_completed": 5
+   },
+   "rewards": {
+    "cash": 400
+   }
+  },
+  {
+   "id": "obj_batch_25",
+   "name": "Line Cook",
+   "kind": "regular",
+   "desc": "Complete 25 batches.",
+   "condition": {
+    "batches_completed": 25
+   },
+   "rewards": {
+    "research_points": 2
+   }
+  },
+  {
+   "id": "obj_batch_100",
+   "name": "Factory Floor",
+   "kind": "regular",
+   "desc": "Complete 100 batches.",
+   "condition": {
+    "batches_completed": 100
+   },
+   "rewards": {
+    "research_points": 3
+   }
+  },
+  {
+   "id": "obj_day5k",
+   "name": "Earn $5,000 in one day",
+   "kind": "regular",
+   "desc": "Have a $5,000-profit day.",
+   "condition": {
+    "best_day_profit": 5000
+   },
+   "rewards": {
+    "research_points": 2
+   }
+  },
+  {
+   "id": "obj_staff_3",
+   "name": "Small Team",
+   "kind": "regular",
+   "desc": "Employ 3 people.",
+   "condition": {
+    "staff_count": 3
+   },
+   "rewards": {
+    "cash": 600
+   }
+  },
+  {
+   "id": "obj_staff_8",
+   "name": "Growing Team",
+   "kind": "regular",
+   "desc": "Employ 8 people.",
+   "condition": {
+    "staff_count": 8
+   },
+   "rewards": {
+    "research_points": 2
+   }
+  },
+  {
+   "id": "obj_rep_50",
+   "name": "Known in Town",
+   "kind": "regular",
+   "desc": "Reach 50 reputation.",
+   "condition": {
+    "reputation": 50
+   },
+   "rewards": {
+    "cash": 800
+   }
+  },
+  {
+   "id": "obj_rep_80",
+   "name": "City Favorite",
+   "kind": "regular",
+   "desc": "Reach 80 reputation.",
+   "condition": {
+    "reputation": 80
+   },
+   "rewards": {
+    "research_points": 3
+   }
+  },
+  {
+   "id": "obj_comp_80",
+   "name": "Clean House",
+   "kind": "regular",
+   "desc": "Reach 80 compliance.",
+   "condition": {
+    "compliance": 80
+   },
+   "rewards": {
+    "research_points": 2
+   }
+  },
+  {
+   "id": "obj_stage_2",
+   "name": "Small Business",
+   "kind": "regular",
+   "desc": "Reach company stage 2.",
+   "condition": {
+    "stage": 2
+   },
+   "rewards": {
+    "cash": 1000
+   }
+  },
+  {
+   "id": "obj_stage_3",
+   "name": "Local Supplier",
+   "kind": "regular",
+   "desc": "Reach company stage 3.",
+   "condition": {
+    "stage": 3
+   },
+   "rewards": {
+    "research_points": 2
+   }
+  },
+  {
+   "id": "obj_stage_4",
+   "name": "Industrial Operation",
+   "kind": "regular",
+   "desc": "Reach company stage 4.",
+   "condition": {
+    "stage": 4
+   },
+   "rewards": {
+    "research_points": 3
+   }
+  },
+  {
+   "id": "obj_stage_5",
+   "name": "Citywide Company",
+   "kind": "regular",
+   "desc": "Reach company stage 5.",
+   "condition": {
+    "stage": 5
+   },
+   "rewards": {
+    "research_points": 4
+   }
+  },
+  {
+   "id": "obj_stage_6",
+   "name": "Contract Contender",
+   "kind": "regular",
+   "desc": "Reach company stage 6.",
+   "condition": {
+    "stage": 6
+   },
+   "rewards": {
+    "research_points": 5
+   }
+  },
+  {
+   "id": "obj_research_5",
+   "name": "R&D Habit",
+   "kind": "regular",
+   "desc": "Complete 5 research projects.",
+   "condition": {
+    "research_count": 5
+   },
+   "rewards": {
+    "cash": 1500
+   }
+  },
+  {
+   "id": "obj_research_15",
+   "name": "Innovation Engine",
+   "kind": "regular",
+   "desc": "Complete 15 research projects.",
+   "condition": {
+    "research_count": 15
+   },
+   "rewards": {
+    "research_points": 3
+   }
+  },
+  {
+   "id": "obj_conveyor_1",
+   "name": "First Conveyor",
+   "kind": "regular",
+   "desc": "Build a conveyor connection.",
+   "condition": {
+    "conveyor_count": 1
+   },
+   "rewards": {
+    "research_points": 2
+   }
+  },
+  {
+   "id": "obj_conveyor_5",
+   "name": "Connected Factory",
+   "kind": "regular",
+   "desc": "Run 5 conveyor connections.",
+   "condition": {
+    "conveyor_count": 5
+   },
+   "rewards": {
+    "research_points": 3
+   }
+  },
+  {
+   "id": "obj_auto_25",
+   "name": "Hands Off (25%)",
+   "kind": "regular",
+   "desc": "Reach 25% automation.",
+   "condition": {
+    "automation": 25
+   },
+   "rewards": {
+    "research_points": 2
+   }
+  },
+  {
+   "id": "obj_auto_50",
+   "name": "Hands Off (50%)",
+   "kind": "regular",
+   "desc": "Reach 50% automation.",
+   "condition": {
+    "automation": 50
+   },
+   "rewards": {
+    "research_points": 3
+   }
+  },
+  {
+   "id": "obj_auto_85",
+   "name": "Hands Off (85%)",
+   "kind": "regular",
+   "desc": "Reach 85% automation.",
+   "condition": {
+    "automation": 85
+   },
+   "rewards": {
+    "research_points": 4
+   }
+  },
+  {
+   "id": "obj_val_100k",
+   "name": "Six Figures",
+   "kind": "regular",
+   "desc": "Reach $100,000 valuation.",
+   "condition": {
+    "valuation": 100000
+   },
+   "rewards": {
+    "research_points": 2
+   }
+  },
+  {
+   "id": "obj_val_500k",
+   "name": "Half a Million",
+   "kind": "regular",
+   "desc": "Reach $500,000 valuation.",
+   "condition": {
+    "valuation": 500000
+   },
+   "rewards": {
+    "research_points": 3
+   }
+  },
+  {
+   "id": "obj_val_1m",
+   "name": "Millionaire on Paper",
+   "kind": "regular",
+   "desc": "Reach $1,000,000 valuation.",
+   "condition": {
+    "valuation": 1000000
+   },
+   "rewards": {
+    "research_points": 4
+   }
+  },
+  {
+   "id": "obj_store_2",
+   "name": "Second Location",
+   "kind": "regular",
+   "desc": "Own 2 stores.",
+   "condition": {
+    "stores_owned": 2
+   },
+   "rewards": {
+    "cash": 3000
+   }
+  },
+  {
+   "id": "obj_store_3",
+   "name": "Retail Network",
+   "kind": "regular",
+   "desc": "Own 3 profitable stores.",
+   "condition": {
+    "stores_profitable": 3
+   },
+   "rewards": {
+    "research_points": 4
+   }
+  },
+  {
+   "id": "obj_loan",
+   "name": "Debt Free",
+   "kind": "regular",
+   "desc": "Repay the startup loan.",
+   "condition": {
+    "loan_repaid": 1
+   },
+   "rewards": {
+    "reputation": 5
+   }
+  },
+  {
+   "id": "obj_premium",
+   "name": "Premium Craft",
+   "kind": "regular",
+   "desc": "Produce a Premium-quality lot.",
+   "condition": {
+    "premium_batch": 1
+   },
+   "rewards": {
+    "research_points": 2
+   }
+  },
+  {
+   "id": "obj_tier3",
+   "name": "Modern Machinery",
+   "kind": "regular",
+   "desc": "Upgrade 3 machines to Tier 3.",
+   "condition": {
+    "machines_tier3": 3
+   },
+   "rewards": {
+    "research_points": 3
+   }
+  },
+  {
+   "id": "obj_serve_500",
+   "name": "Familiar Faces",
+   "kind": "regular",
+   "desc": "Serve 500 customers.",
+   "condition": {
+    "customers_served": 500
+   },
+   "rewards": {
+    "cash": 2000
+   }
+  },
+  {
+   "id": "ch_day30_profit",
+   "name": "Fast Start",
+   "kind": "challenge",
+   "desc": "Reach $30,000 cash by day 30.",
+   "condition": {
+    "cash": 30000
+   },
+   "rewards": {
+    "research_points": 3
+   }
+  },
+  {
+   "id": "ch_exceptional",
+   "name": "Produce an Exceptional batch",
+   "kind": "challenge",
+   "desc": "Roll an Exceptional-quality lot.",
+   "condition": {
+    "exceptional_batch": 1
+   },
+   "rewards": {
+    "research_points": 3
+   }
+  },
+  {
+   "id": "ch_no_waste",
+   "name": "Zero Waste Week",
+   "kind": "challenge",
+   "desc": "Serve 200 customers with no expired stock.",
+   "condition": {
+    "customers_served": 200
+   },
+   "rewards": {
+    "research_points": 2
+   }
+  },
+  {
+   "id": "ch_rep90",
+   "name": "Beloved Brand",
+   "kind": "challenge",
+   "desc": "Reach 90 reputation.",
+   "condition": {
+    "reputation": 90
+   },
+   "rewards": {
+    "research_points": 4
+   }
+  },
+  {
+   "id": "ch_comp95",
+   "name": "Spotless",
+   "kind": "challenge",
+   "desc": "Reach 95 compliance.",
+   "condition": {
+    "compliance": 95
+   },
+   "rewards": {
+    "research_points": 3
+   }
+  },
+  {
+   "id": "ch_auto95",
+   "name": "Ghost Factory",
+   "kind": "challenge",
+   "desc": "Reach 95% automation.",
+   "condition": {
+    "automation": 95
+   },
+   "rewards": {
+    "research_points": 5
+   }
+  },
+  {
+   "id": "ch_auto100",
+   "name": "Full Autonomy",
+   "kind": "challenge",
+   "desc": "Reach 100% automation.",
+   "condition": {
+    "automation": 100
+   },
+   "rewards": {
+    "research_points": 6
+   }
+  },
+  {
+   "id": "ch_val2m",
+   "name": "Two Million",
+   "kind": "challenge",
+   "desc": "Reach $2,000,000 valuation.",
+   "condition": {
+    "valuation": 2000000
+   },
+   "rewards": {
+    "research_points": 4
+   }
+  },
+  {
+   "id": "ch_staff12",
+   "name": "Full Payroll",
+   "kind": "challenge",
+   "desc": "Employ 12 people at once.",
+   "condition": {
+    "staff_count": 12
+   },
+   "rewards": {
+    "research_points": 3
+   }
+  },
+  {
+   "id": "ch_batches200",
+   "name": "Production Marathon",
+   "kind": "challenge",
+   "desc": "Complete 200 batches.",
+   "condition": {
+    "batches_completed": 200
+   },
+   "rewards": {
+    "research_points": 4
+   }
+  },
+  {
+   "id": "ch_sales5000",
+   "name": "Citywide Supplier",
+   "kind": "challenge",
+   "desc": "Sell 5,000 units.",
+   "condition": {
+    "units_sold": 5000
+   },
+   "rewards": {
+    "research_points": 4
+   }
+  },
+  {
+   "id": "ch_research25",
+   "name": "Think Tank",
+   "kind": "challenge",
+   "desc": "Complete 25 research projects.",
+   "condition": {
+    "research_count": 25
+   },
+   "rewards": {
+    "research_points": 5
+   }
+  },
+  {
+   "id": "ch_conveyor10",
+   "name": "Belt Empire",
+   "kind": "challenge",
+   "desc": "Run 10 conveyor connections.",
+   "condition": {
+    "conveyor_count": 10
+   },
+   "rewards": {
+    "research_points": 4
+   }
+  },
+  {
+   "id": "ch_day10k",
+   "name": "Golden Day",
+   "kind": "challenge",
+   "desc": "Bank $10,000 profit in one day.",
+   "condition": {
+    "best_day_profit": 10000
+   },
+   "rewards": {
+    "research_points": 4
+   }
+  },
+  {
+   "id": "ch_serve2000",
+   "name": "Household Name",
+   "kind": "challenge",
+   "desc": "Serve 2,000 customers.",
+   "condition": {
+    "customers_served": 2000
+   },
+   "rewards": {
+    "research_points": 4
+   }
+  },
+  {
+   "id": "ch_win",
+   "name": "Win the Contract",
+   "kind": "challenge",
+   "desc": "Win the Verdantia City Supply Contract.",
+   "condition": {
+    "trial_won": 1
+   },
+   "rewards": {}
+  }
+ ]
+}

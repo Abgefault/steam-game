@@ -1,0 +1,166 @@
+{
+ "machines": [
+  {
+   "id": "cultivation",
+   "name": "Cultivation Module",
+   "slot": "cultivation",
+   "tiers": [
+    {
+     "cost": 0,
+     "desc": "Primitive module, slow and thirsty."
+    },
+    {
+     "cost": 6000,
+     "desc": "Sealed module with stable cycles."
+    },
+    {
+     "cost": 18000,
+     "desc": "Racked modules with sensor feedback."
+    },
+    {
+     "cost": 45000,
+     "desc": "Automated vertical module wall."
+    },
+    {
+     "cost": 95000,
+     "desc": "Industrial module hall segment."
+    }
+   ]
+  },
+  {
+   "id": "conditioning",
+   "name": "Conditioning Unit",
+   "slot": "conditioning",
+   "tiers": [
+    {
+     "cost": 0,
+     "desc": "A repurposed drying cabinet."
+    },
+    {
+     "cost": 5000,
+     "desc": "Calibrated conditioning cabinet."
+    },
+    {
+     "cost": 15000,
+     "desc": "Twin-chamber conditioning line."
+    },
+    {
+     "cost": 38000,
+     "desc": "Continuous-flow conditioning tunnel."
+    },
+    {
+     "cost": 80000,
+     "desc": "Climate-managed conditioning hall."
+    }
+   ]
+  },
+  {
+   "id": "processing",
+   "name": "Processing Machine",
+   "slot": "processing",
+   "tiers": [
+    {
+     "cost": 0,
+     "desc": "Hand-fed processor, temperamental."
+    },
+    {
+     "cost": 7000,
+     "desc": "Bench processor with feed hopper."
+    },
+    {
+     "cost": 20000,
+     "desc": "Enclosed processing station."
+    },
+    {
+     "cost": 50000,
+     "desc": "Dual-line processing cell."
+    },
+    {
+     "cost": 105000,
+     "desc": "Automated processing suite."
+    }
+   ]
+  },
+  {
+   "id": "lab",
+   "name": "Quality Laboratory",
+   "slot": "lab",
+   "tiers": [
+    {
+     "cost": 0,
+     "desc": "A microscope and stubborn optimism."
+    },
+    {
+     "cost": 8000,
+     "desc": "Certified test bench."
+    },
+    {
+     "cost": 22000,
+     "desc": "Accredited lab station."
+    },
+    {
+     "cost": 52000,
+     "desc": "Automated sample handling."
+    },
+    {
+     "cost": 110000,
+     "desc": "Full digital QA laboratory."
+    }
+   ]
+  },
+  {
+   "id": "product",
+   "name": "Product Machine",
+   "slot": "product",
+   "tiers": [
+    {
+     "cost": 0,
+     "desc": "Manual assembly table with molds."
+    },
+    {
+     "cost": 9000,
+     "desc": "Powered forming machine."
+    },
+    {
+     "cost": 26000,
+     "desc": "Multi-head product line."
+    },
+    {
+     "cost": 60000,
+     "desc": "Recipe-programmable cell."
+    },
+    {
+     "cost": 125000,
+     "desc": "Flexible robotic product line."
+    }
+   ]
+  },
+  {
+   "id": "packaging",
+   "name": "Packaging Machine",
+   "slot": "packaging",
+   "tiers": [
+    {
+     "cost": 0,
+     "desc": "Manual packaging table."
+    },
+    {
+     "cost": 6500,
+     "desc": "Semi-automatic sealer."
+    },
+    {
+     "cost": 19000,
+     "desc": "Label-and-seal combo unit."
+    },
+    {
+     "cost": 48000,
+     "desc": "Automated packing lane."
+    },
+    {
+     "cost": 100000,
+     "desc": "High-speed packaging cell."
+    }
+   ]
+  }
+ ]
+}

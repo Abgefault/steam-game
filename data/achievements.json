@@ -1,0 +1,220 @@
+{
+ "achievements": [
+  {
+   "id": "ach_first_batch",
+   "name": "Green Thumb",
+   "desc": "Complete your first batch.",
+   "condition": {
+    "batches_completed": 1
+   }
+  },
+  {
+   "id": "ach_first_sale",
+   "name": "Open for Business",
+   "desc": "Sell your first product.",
+   "condition": {
+    "units_sold": 1
+   }
+  },
+  {
+   "id": "ach_first_hire",
+   "name": "Now We're a Team",
+   "desc": "Hire your first employee.",
+   "condition": {
+    "staff_count": 1
+   }
+  },
+  {
+   "id": "ach_sell_100",
+   "name": "Hundred Club",
+   "desc": "Sell 100 units.",
+   "condition": {
+    "units_sold": 100
+   }
+  },
+  {
+   "id": "ach_sell_1000",
+   "name": "Thousand Club",
+   "desc": "Sell 1,000 units.",
+   "condition": {
+    "units_sold": 1000
+   }
+  },
+  {
+   "id": "ach_sell_10000",
+   "name": "Ten Thousand Strong",
+   "desc": "Sell 10,000 units.",
+   "condition": {
+    "units_sold": 10000
+   }
+  },
+  {
+   "id": "ach_batch_50",
+   "name": "Batch Master",
+   "desc": "Complete 50 batches.",
+   "condition": {
+    "batches_completed": 50
+   }
+  },
+  {
+   "id": "ach_stage_3",
+   "name": "Local Supplier",
+   "desc": "Reach stage 3.",
+   "condition": {
+    "stage": 3
+   }
+  },
+  {
+   "id": "ach_stage_5",
+   "name": "Citywide Company",
+   "desc": "Reach stage 5.",
+   "condition": {
+    "stage": 5
+   }
+  },
+  {
+   "id": "ach_stage_6",
+   "name": "Contract Contender",
+   "desc": "Reach stage 6.",
+   "condition": {
+    "stage": 6
+   }
+  },
+  {
+   "id": "ach_auto_50",
+   "name": "Half Machine",
+   "desc": "Reach 50% automation.",
+   "condition": {
+    "automation": 50
+   }
+  },
+  {
+   "id": "ach_auto_85",
+   "name": "Automation Architect",
+   "desc": "Reach 85% automation.",
+   "condition": {
+    "automation": 85
+   }
+  },
+  {
+   "id": "ach_auto_100",
+   "name": "The Invisible Hand",
+   "desc": "Reach 100% automation.",
+   "condition": {
+    "automation": 100
+   }
+  },
+  {
+   "id": "ach_rep_80",
+   "name": "Talk of the Town",
+   "desc": "Reach 80 reputation.",
+   "condition": {
+    "reputation": 80
+   }
+  },
+  {
+   "id": "ach_comp_90",
+   "name": "By the Book",
+   "desc": "Reach 90 compliance.",
+   "condition": {
+    "compliance": 90
+   }
+  },
+  {
+   "id": "ach_loan",
+   "name": "Unchained",
+   "desc": "Repay the startup loan.",
+   "condition": {
+    "loan_repaid": 1
+   }
+  },
+  {
+   "id": "ach_store_3",
+   "name": "Chain Reaction",
+   "desc": "Own 3 stores.",
+   "condition": {
+    "stores_owned": 3
+   }
+  },
+  {
+   "id": "ach_val_1m",
+   "name": "Paper Millionaire",
+   "desc": "Reach $1M valuation.",
+   "condition": {
+    "valuation": 1000000
+   }
+  },
+  {
+   "id": "ach_val_25m",
+   "name": "Qualified",
+   "desc": "Reach $2.5M valuation.",
+   "condition": {
+    "valuation": 2500000
+   }
+  },
+  {
+   "id": "ach_premium",
+   "name": "Fine Craft",
+   "desc": "Produce a Premium lot.",
+   "condition": {
+    "premium_batch": 1
+   }
+  },
+  {
+   "id": "ach_exceptional",
+   "name": "Perfection",
+   "desc": "Produce an Exceptional lot.",
+   "condition": {
+    "exceptional_batch": 1
+   }
+  },
+  {
+   "id": "ach_research_10",
+   "name": "Lab Coat Energy",
+   "desc": "Finish 10 research projects.",
+   "condition": {
+    "research_count": 10
+   }
+  },
+  {
+   "id": "ach_staff_10",
+   "name": "Two Digits",
+   "desc": "Employ 10 people.",
+   "condition": {
+    "staff_count": 10
+   }
+  },
+  {
+   "id": "ach_serve_1000",
+   "name": "People Person",
+   "desc": "Serve 1,000 customers.",
+   "condition": {
+    "customers_served": 1000
+   }
+  },
+  {
+   "id": "ach_conveyors",
+   "name": "Keep It Rolling",
+   "desc": "Run 5 conveyor connections.",
+   "condition": {
+    "conveyor_count": 5
+   }
+  },
+  {
+   "id": "ach_perfect_audit",
+   "name": "Immaculate",
+   "desc": "Pass an audit with a perfect score.",
+   "condition": {
+    "day": 99999
+   }
+  },
+  {
+   "id": "ach_win_campaign",
+   "name": "Verdantia's Choice",
+   "desc": "Win the city supply contract.",
+   "condition": {
+    "day": 99999
+   }
+  }
+ ]
+}

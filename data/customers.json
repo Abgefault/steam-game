@@ -1,0 +1,131 @@
+{
+ "archetypes": [
+  {
+   "id": "budget",
+   "name": "Budget Shopper",
+   "budget": 16,
+   "categories": [
+    "flower",
+    "preroll"
+   ],
+   "quality_expectation": 0.4,
+   "price_sensitivity": 0.9,
+   "queue_tolerance": 0.6,
+   "trend_sensitivity": 0.1,
+   "wellness_focus": 0.1,
+   "extra_purchase": 0.1
+  },
+  {
+   "id": "newcomer",
+   "name": "Curious Newcomer",
+   "budget": 24,
+   "categories": [
+    "edible",
+    "beverage",
+    "preroll"
+   ],
+   "quality_expectation": 0.8,
+   "price_sensitivity": 0.5,
+   "queue_tolerance": 0.7,
+   "trend_sensitivity": 0.4,
+   "wellness_focus": 0.3,
+   "extra_purchase": 0.2
+  },
+  {
+   "id": "wellness",
+   "name": "Wellness Customer",
+   "budget": 45,
+   "categories": [
+    "wellness",
+    "oil",
+    "beverage"
+   ],
+   "quality_expectation": 1.8,
+   "price_sensitivity": 0.3,
+   "queue_tolerance": 0.8,
+   "trend_sensitivity": 0.2,
+   "wellness_focus": 1.0,
+   "extra_purchase": 0.3
+  },
+  {
+   "id": "enthusiast",
+   "name": "Enthusiast",
+   "budget": 55,
+   "categories": [
+    "flower",
+    "oil",
+    "limited"
+   ],
+   "quality_expectation": 2.2,
+   "price_sensitivity": 0.2,
+   "queue_tolerance": 0.9,
+   "trend_sensitivity": 0.5,
+   "wellness_focus": 0.1,
+   "extra_purchase": 0.4
+  },
+  {
+   "id": "trend",
+   "name": "Trend Seeker",
+   "budget": 38,
+   "categories": [
+    "limited",
+    "beverage",
+    "edible"
+   ],
+   "quality_expectation": 1.2,
+   "price_sensitivity": 0.4,
+   "queue_tolerance": 0.4,
+   "trend_sensitivity": 1.0,
+   "wellness_focus": 0.2,
+   "extra_purchase": 0.35
+  },
+  {
+   "id": "professional",
+   "name": "Busy Professional",
+   "budget": 50,
+   "categories": [
+    "oil",
+    "wellness",
+    "preroll"
+   ],
+   "quality_expectation": 1.6,
+   "price_sensitivity": 0.25,
+   "queue_tolerance": 0.2,
+   "trend_sensitivity": 0.2,
+   "wellness_focus": 0.5,
+   "extra_purchase": 0.25
+  },
+  {
+   "id": "regular",
+   "name": "Loyal Regular",
+   "budget": 30,
+   "categories": [
+    "flower",
+    "preroll",
+    "edible"
+   ],
+   "quality_expectation": 1.0,
+   "price_sensitivity": 0.5,
+   "queue_tolerance": 0.8,
+   "trend_sensitivity": 0.2,
+   "wellness_focus": 0.2,
+   "extra_purchase": 0.3
+  },
+  {
+   "id": "tourist",
+   "name": "Tourist",
+   "budget": 34,
+   "categories": [
+    "limited",
+    "preroll",
+    "edible"
+   ],
+   "quality_expectation": 0.9,
+   "price_sensitivity": 0.4,
+   "queue_tolerance": 0.7,
+   "trend_sensitivity": 0.6,
+   "wellness_focus": 0.2,
+   "extra_purchase": 0.5
+  }
+ ]
+}
