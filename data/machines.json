@@ -10,11 +10,11 @@
      "desc": "Primitive module, slow and thirsty."
     },
     {
-     "cost": 6000,
+     "cost": 3500,
      "desc": "Sealed module with stable cycles."
     },
     {
-     "cost": 18000,
+     "cost": 10500,
      "desc": "Racked modules with sensor feedback."
     },
     {
@@ -37,11 +37,11 @@
      "desc": "A repurposed drying cabinet."
     },
     {
-     "cost": 5000,
+     "cost": 3000,
      "desc": "Calibrated conditioning cabinet."
     },
     {
-     "cost": 15000,
+     "cost": 9000,
      "desc": "Twin-chamber conditioning line."
     },
     {
@@ -64,11 +64,11 @@
      "desc": "Hand-fed processor, temperamental."
     },
     {
-     "cost": 7000,
+     "cost": 4000,
      "desc": "Bench processor with feed hopper."
     },
     {
-     "cost": 20000,
+     "cost": 12000,
      "desc": "Enclosed processing station."
     },
     {
@@ -91,11 +91,11 @@
      "desc": "A microscope and stubborn optimism."
     },
     {
-     "cost": 8000,
+     "cost": 4500,
      "desc": "Certified test bench."
     },
     {
-     "cost": 22000,
+     "cost": 13000,
      "desc": "Accredited lab station."
     },
     {
@@ -118,11 +118,11 @@
      "desc": "Manual assembly table with molds."
     },
     {
-     "cost": 9000,
+     "cost": 5000,
      "desc": "Powered forming machine."
     },
     {
-     "cost": 26000,
+     "cost": 15500,
      "desc": "Multi-head product line."
     },
     {
@@ -145,11 +145,11 @@
      "desc": "Manual packaging table."
     },
     {
-     "cost": 6500,
+     "cost": 3500,
      "desc": "Semi-automatic sealer."
     },
     {
-     "cost": 19000,
+     "cost": 11000,
      "desc": "Label-and-seal combo unit."
     },
     {

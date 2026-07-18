@@ -20,7 +20,7 @@ static func generate_candidate(s: Dictionary, role: String) -> Dictionary:
 	var first: Array = names.get("first", ["Alex"])
 	var last: Array = names.get("last", ["Miller"])
 	var skill := 2 + randi() % 5
-	var wage := DataRegistry.bal("base_wage", 90.0) + skill * 22.0 + randf_range(-8.0, 12.0)
+	var wage := DataRegistry.bal("base_wage", 45.0) + skill * 13.0 + randf_range(-6.0, 8.0)
 	var emp := {
 		"id": int(s.staff_seq),
 		"name": "%s %s" % [first.pick_random(), last.pick_random()],
@@ -163,7 +163,7 @@ static func _gain_xp(s: Dictionary, e: Dictionary, amount: int) -> void:
 		e.xp = 0
 		e.level = int(e.level) + 1
 		e.skill = mini(10, int(e.skill) + 1)
-		e.wage = snappedf(float(e.wage) * 1.06, 1.0)
+		e.wage = snappedf(float(e.wage) * 1.04, 1.0)
 		EventBus.employee_leveled.emit(e)
 		EventBus.notify("%s reached level %d!" % [e.name, int(e.level)], "success")
 

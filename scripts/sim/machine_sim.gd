@@ -96,14 +96,14 @@ static func load_and_start(s: Dictionary, machine_id: String, payload: Dictionar
 			s.raw[sid] = int(s.raw[sid]) - take
 			if int(s.raw[sid]) <= 0: s.raw.erase(sid)
 			m["payload"] = {"strain_id": sid, "qty": take}
-			minutes = 100.0
+			minutes = 70.0
 		"processing":
 			var sid2 := _pool_first(s.conditioned)
 			var take2: int = mini(int(s.conditioned[sid2]), 2)
 			s.conditioned[sid2] = int(s.conditioned[sid2]) - take2
 			if int(s.conditioned[sid2]) <= 0: s.conditioned.erase(sid2)
-			m["payload"] = {"strain_id": sid2, "qty": take2 * 5}
-			minutes = 90.0
+			m["payload"] = {"strain_id": sid2, "qty": take2 * 6}
+			minutes = 70.0
 		"lab":
 			var b: Variant = _find_batch_for_lab(s)
 			b["in_lab"] = true

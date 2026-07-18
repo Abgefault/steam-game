@@ -40,7 +40,7 @@ func _ready() -> void:
 	var actions := UIKit.hbox(10)
 	v.add_child(actions)
 	actions.add_child(UIKit.button("Load Save", func():
-		var dlg := load("res://scripts/ui/save_load_dialog.gd").new()
+		var dlg: Control = load("res://scripts/ui/save_load_dialog.gd").new()
 		dlg.mode = "load"
 		add_child(dlg)))
 	actions.add_child(UIKit.button("Restart Campaign", func(): SceneRouter.goto("company_setup")))

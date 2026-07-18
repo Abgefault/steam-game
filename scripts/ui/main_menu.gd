@@ -34,7 +34,7 @@ func _ready() -> void:
 			if SaveService.load_game("autosave"):
 				SceneRouter.start_loaded_game()))
 	buttons.add_child(_menu_button("Load Game", func():
-		var dlg := load("res://scripts/ui/save_load_dialog.gd").new()
+		var dlg: Control = load("res://scripts/ui/save_load_dialog.gd").new()
 		dlg.mode = "load"
 		add_child(dlg)))
 	buttons.add_child(_menu_button("Settings", func():

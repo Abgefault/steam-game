@@ -154,7 +154,7 @@ static func expire_lots(s: Dictionary, new_day: int) -> int:
 			lot.history.append({"day": new_day, "what": "expired"})
 	if wasted > 0:
 		s.daily.wasted_units += wasted
-		s.compliance = maxf(0.0, float(s.compliance) - minf(4.0, wasted * 0.05))
+		s.compliance = maxf(0.0, float(s.compliance) - minf(2.0, wasted * 0.02))
 		EventBus.notify("%d units expired and were disposed." % wasted, "warning")
 		EventBus.inventory_changed.emit()
 	_prune(s)

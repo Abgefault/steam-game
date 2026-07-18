@@ -65,25 +65,38 @@ static func gross_margin(s: Dictionary, product_id: String) -> float:
 	return (price - unit_cost(product_id)) / price
 
 
-## Company valuation: cash + inventory + equipment + store goodwill - debt.
+## Company valuation: cash + inventory + equipment + store goodwill +
+## a profit multiple on recent daily results - debt.
 static func valuation(s: Dictionary) -> float:
 	var v := float(s.cash)
 	for lot: Dictionary in s.lots:
-		v += float(lot.qty) * unit_cost(str(lot.product_id)) * 1.4
+		v += float(lot.qty) * unit_cost(str(lot.product_id)) * DataRegistry.bal("valuation_inventory_multiple", 2.0)
 	for m: Dictionary in s.machines.values():
 		var def: Dictionary = DataRegistry.machines.get(str(m.def_id), {})
 		var tiers: Array = def.get("tiers", [])
 		var t: int = clampi(int(m.tier) - 1, 0, tiers.size() - 1)
 		if t < tiers.size():
-			v += float(tiers[t].get("cost", 0.0)) * 0.55 * (float(m.condition) / 100.0)
+			var replacement := 0.0
+			for ti in range(0, t + 1):
+				replacement += float(tiers[ti].get("cost", 0.0))
+			v += replacement * DataRegistry.bal("valuation_machine_resale", 0.7) * (0.4 + 0.6 * float(m.condition) / 100.0)
 	for st: Dictionary in s.stores.values():
 		if bool(st.owned):
-			v += DataRegistry.bal("store_goodwill", 90000.0) * (0.5 + float(st.appeal) / 200.0)
+			v += DataRegistry.bal("store_goodwill", 120000.0) * (0.5 + float(st.appeal) / 200.0)
 			var hist: Array = st.get("profit_history", [])
 			var recent := 0.0
 			for h in hist.slice(maxi(0, hist.size() - 7)):
 				recent += float(h)
 			v += maxf(0.0, recent) * 30.0
+	# Profit multiple over the last week of company-wide results.
+	var daily: Array = s.stats.daily
+	var profit_sum := 0.0
+	var n := 0
+	for rec: Dictionary in daily.slice(maxi(0, daily.size() - 7)):
+		profit_sum += float(rec.get("profit", 0.0))
+		n += 1
+	if n > 0:
+		v += maxf(0.0, profit_sum / n) * DataRegistry.bal("valuation_profit_multiple", 200.0)
 	v += float(s.reputation) * 2500.0
 	v -= float(s.loan_balance)
 	return maxf(0.0, v)

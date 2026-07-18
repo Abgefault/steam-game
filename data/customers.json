@@ -3,7 +3,7 @@
   {
    "id": "budget",
    "name": "Budget Shopper",
-   "budget": 16,
+   "budget": 20,
    "categories": [
     "flower",
     "preroll"
@@ -18,7 +18,7 @@
   {
    "id": "newcomer",
    "name": "Curious Newcomer",
-   "budget": 24,
+   "budget": 30,
    "categories": [
     "edible",
     "beverage",
@@ -34,7 +34,7 @@
   {
    "id": "wellness",
    "name": "Wellness Customer",
-   "budget": 45,
+   "budget": 56,
    "categories": [
     "wellness",
     "oil",
@@ -50,7 +50,7 @@
   {
    "id": "enthusiast",
    "name": "Enthusiast",
-   "budget": 55,
+   "budget": 69,
    "categories": [
     "flower",
     "oil",
@@ -66,7 +66,7 @@
   {
    "id": "trend",
    "name": "Trend Seeker",
-   "budget": 38,
+   "budget": 48,
    "categories": [
     "limited",
     "beverage",
@@ -82,7 +82,7 @@
   {
    "id": "professional",
    "name": "Busy Professional",
-   "budget": 50,
+   "budget": 62,
    "categories": [
     "oil",
     "wellness",
@@ -98,7 +98,7 @@
   {
    "id": "regular",
    "name": "Loyal Regular",
-   "budget": 30,
+   "budget": 38,
    "categories": [
     "flower",
     "preroll",
@@ -114,7 +114,7 @@
   {
    "id": "tourist",
    "name": "Tourist",
-   "budget": 34,
+   "budget": 42,
    "categories": [
     "limited",
     "preroll",

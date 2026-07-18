@@ -15,6 +15,12 @@ func _ready() -> void:
 	if "--smoke-test" in args:
 		await _smoke_test()
 		return
+	if "--run-tests" in args:
+		add_child((load("res://tests/run_tests.gd") as GDScript).new())
+		return
+	if "--economy-sim" in args:
+		add_child((load("res://tools/economy_sim.gd") as GDScript).new())
+		return
 	if not DataRegistry.validation_errors.is_empty() and OS.is_debug_build():
 		status_label.text = "DATA ERRORS — see log."
 		for e in DataRegistry.validation_errors:

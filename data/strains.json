@@ -4,42 +4,42 @@
    "id": "verdant_dawn",
    "name": "Verdant Dawn",
    "yield": 4,
-   "grow_minutes": 220,
+   "grow_minutes": 130,
    "tone": "calm"
   },
   {
    "id": "citrus_static",
    "name": "Citrus Static",
    "yield": 3,
-   "grow_minutes": 260,
+   "grow_minutes": 150,
    "tone": "bright"
   },
   {
    "id": "moon_garden",
    "name": "Moon Garden",
    "yield": 4,
-   "grow_minutes": 300,
+   "grow_minutes": 180,
    "tone": "mellow"
   },
   {
    "id": "electric_fern",
    "name": "Electric Fern",
    "yield": 3,
-   "grow_minutes": 340,
+   "grow_minutes": 200,
    "tone": "vivid"
   },
   {
    "id": "amber_drift",
    "name": "Amber Drift",
    "yield": 5,
-   "grow_minutes": 280,
+   "grow_minutes": 160,
    "tone": "warm"
   },
   {
    "id": "northern_glass",
    "name": "Northern Glass",
    "yield": 2,
-   "grow_minutes": 380,
+   "grow_minutes": 220,
    "tone": "crisp"
   }
  ]

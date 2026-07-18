@@ -11,6 +11,7 @@ const SCENES := {
 }
 
 var current: String = ""
+var suppressed: bool = false   # used by headless tests/simulations
 
 
 func _ready() -> void:
@@ -19,6 +20,8 @@ func _ready() -> void:
 
 
 func goto(key: String) -> void:
+	if suppressed:
+		return
 	if not SCENES.has(key):
 		push_error("Unknown scene key: %s" % key)
 		return

@@ -11,11 +11,11 @@ func _ready() -> void:
 	v.add_child(UIKit.title("Paused"))
 	v.add_child(UIKit.button("Continue", queue_free))
 	v.add_child(UIKit.button("Save game", func():
-		var dlg := load("res://scripts/ui/save_load_dialog.gd").new()
+		var dlg: Control = load("res://scripts/ui/save_load_dialog.gd").new()
 		dlg.mode = "save"
 		get_parent().add_child(dlg)))
 	v.add_child(UIKit.button("Load game", func():
-		var dlg := load("res://scripts/ui/save_load_dialog.gd").new()
+		var dlg: Control = load("res://scripts/ui/save_load_dialog.gd").new()
 		dlg.mode = "load"
 		get_parent().add_child(dlg)))
 	v.add_child(UIKit.button("Settings", func():

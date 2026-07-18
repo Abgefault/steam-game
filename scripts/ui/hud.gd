@@ -240,7 +240,7 @@ func _on_alert_cleared(id: String) -> void:
 
 
 func _on_day_ended(day: int, report: Dictionary) -> void:
-	var dlg := load("res://scripts/ui/daily_report.gd").new()
+	var dlg: Control = load("res://scripts/ui/daily_report.gd").new()
 	dlg.report = report
 	dlg.day = day
 	_show_dialog(dlg)
@@ -249,7 +249,7 @@ func _on_day_ended(day: int, report: Dictionary) -> void:
 func _on_game_event(ev: Dictionary) -> void:
 	if bool(ev.resolved):
 		return
-	var dlg := load("res://scripts/ui/event_popup.gd").new()
+	var dlg: Control = load("res://scripts/ui/event_popup.gd").new()
 	dlg.event_data = ev
 	_show_dialog(dlg)
 
@@ -281,7 +281,7 @@ func _lock_player(locked: bool) -> void:
 
 
 func open_machine_dialog(machine_id: String) -> void:
-	var dlg := load("res://scripts/ui/machine_dialog.gd").new()
+	var dlg: Control = load("res://scripts/ui/machine_dialog.gd").new()
 	dlg.machine_id = machine_id
 	_show_dialog(dlg)
 

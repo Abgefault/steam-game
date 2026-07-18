@@ -136,7 +136,8 @@ static func decide_and_buy(s: Dictionary, store_id: String, archetype: Dictionar
 	var quality_expect := float(archetype.get("quality_expectation", 1.0))
 	if best_pid == "":
 		if apply:
-			_after_visit(s, st, false, "Nothing I want in stock…")
+			# An empty shelf disappoints, but far less than bad service.
+			_after_visit(s, st, false, "Nothing I want in stock…", 0.3)
 		return {"bought": false, "reason": "no_product", "feedback": "Nothing I want in stock…"}
 	# Service and queue check.
 	var service := StaffSim.best_skill_at_store(s, store_id, "sales") / 10.0
@@ -145,7 +146,7 @@ static func decide_and_buy(s: Dictionary, store_id: String, archetype: Dictionar
 	if apply:
 		var consumed := InventorySim.consume(s, "display:%s" % store_id, best_pid, 1)
 		if int(consumed.taken) < 1:
-			_after_visit(s, st, false, "It was sold out right in front of me!")
+			_after_visit(s, st, false, "It was sold out right in front of me!", 0.5)
 			return {"bought": false, "reason": "sold_out"}
 		var quality := float(consumed.quality_sum)
 		EconomySim.earn(s, best_price, "Sale: %s" % str(DataRegistry.products[best_pid].name))
@@ -173,18 +174,19 @@ static func _feedback_for(happy: bool, quality: float, expect: float, _price: fl
 		"Hmm, not impressed today."].pick_random()
 
 
-static func _after_visit(s: Dictionary, st: Dictionary, happy: bool, feedback: String) -> void:
+static func _after_visit(s: Dictionary, st: Dictionary, happy: bool, feedback: String,
+		severity: float = 1.0) -> void:
 	if happy:
 		s.daily.customers_happy += 1
 		st.satisfaction = minf(100.0, float(st.satisfaction) + 0.25)
 		if randf() < 0.15:
 			st.regulars = int(st.regulars) + 1
-		s.reputation = minf(100.0, float(s.reputation) + 0.03)
+		s.reputation = minf(100.0, float(s.reputation) + 0.035)
 	else:
-		st.satisfaction = maxf(0.0, float(st.satisfaction) - 0.4)
-		if randf() < 0.1 and int(st.regulars) > 0:
+		st.satisfaction = maxf(0.0, float(st.satisfaction) - 0.4 * severity)
+		if randf() < 0.1 * severity and int(st.regulars) > 0:
 			st.regulars = int(st.regulars) - 1
-		s.reputation = maxf(0.0, float(s.reputation) - 0.02)
+		s.reputation = maxf(0.0, float(s.reputation) - 0.02 * severity)
 	EventBus.customer_feedback.emit(str(st.id), feedback, happy)
 	EventBus.reputation_changed.emit(float(s.reputation))
 
