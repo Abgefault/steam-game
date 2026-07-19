@@ -16,9 +16,7 @@ static func create(p_store_id: String) -> ShelfNode:
 
 
 func _build() -> void:
-	var wood := StandardMaterial3D.new()
-	wood.albedo_color = Color(0.45, 0.33, 0.22)
-	wood.roughness = 0.8
+	var wood := MaterialLib.pbr("WoodFloor051", 0.8, Color(0.62, 0.5, 0.4), false)
 	_mesh_box(Vector3(2.4, 0.05, 0.6), Vector3(0, 0.5, 0), wood)
 	_mesh_box(Vector3(2.4, 0.05, 0.6), Vector3(0, 1.0, 0), wood)
 	_mesh_box(Vector3(2.4, 0.05, 0.6), Vector3(0, 1.5, 0), wood)
@@ -73,11 +71,9 @@ func _refresh() -> void:
 			var mesh := BoxMesh.new()
 			mesh.size = Vector3(0.16, 0.2, 0.16)
 			box.mesh = mesh
-			var mat := StandardMaterial3D.new()
 			var h := float(hash(pid) % 360) / 360.0
-			mat.albedo_color = Color.from_hsv(h, 0.45, 0.75)
-			mat.roughness = 0.6
-			box.material_override = mat
+			box.material_override = MaterialLib.pbr("Cardboard004", 3.0,
+				Color.from_hsv(h, 0.4, 0.9), false)
 			@warning_ignore("integer_division")
 			var level := slot / 4
 			box.position = Vector3(-0.95 + (slot % 4) * 0.55 + i * 0.11,

@@ -72,49 +72,60 @@ static func _environment(root: Node3D) -> void:
 	env.background_mode = Environment.BG_SKY
 	var sky := Sky.new()
 	var sky_mat := ProceduralSkyMaterial.new()
-	sky_mat.sky_top_color = Color(0.35, 0.46, 0.6)
-	sky_mat.sky_horizon_color = Color(0.68, 0.7, 0.66)
+	sky_mat.sky_top_color = Color(0.3, 0.45, 0.65)
+	sky_mat.sky_horizon_color = Color(0.72, 0.74, 0.72)
 	sky_mat.ground_bottom_color = Color(0.2, 0.19, 0.17)
-	sky_mat.ground_horizon_color = Color(0.55, 0.55, 0.5)
+	sky_mat.ground_horizon_color = Color(0.58, 0.57, 0.53)
+	sky_mat.sun_angle_max = 20.0
 	sky.sky_material = sky_mat
 	env.sky = sky
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
-	env.ambient_light_energy = 0.7
-	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	env.ambient_light_energy = 0.85
+	env.tonemap_mode = Environment.TONE_MAPPER_ACES
+	env.tonemap_exposure = 1.05
+	# SSAO grounds objects in Forward+; ignored gracefully in compatibility.
+	env.ssao_enabled = true
+	env.ssao_intensity = 1.6
+	env.ssao_radius = 1.5
+	env.adjustment_enabled = true
+	env.adjustment_contrast = 1.04
+	env.adjustment_saturation = 1.06
 	env.fog_enabled = true
-	env.fog_light_color = Color(0.65, 0.68, 0.66)
-	env.fog_density = 0.004
+	env.fog_light_color = Color(0.68, 0.71, 0.7)
+	env.fog_density = 0.0025
 	env.glow_enabled = true
-	env.glow_intensity = 0.25
-	env.glow_bloom = 0.05
+	env.glow_intensity = 0.3
+	env.glow_bloom = 0.04
 	var we := WorldEnvironment.new()
 	we.environment = env
 	root.add_child(we)
 	var sun := DirectionalLight3D.new()
-	sun.rotation_degrees = Vector3(-42, 35, 0)
-	sun.light_energy = 1.1
-	sun.light_color = Color(1.0, 0.96, 0.88)
+	sun.rotation_degrees = Vector3(-44, 38, 0)
+	sun.light_energy = 1.3
+	sun.light_color = Color(1.0, 0.95, 0.85)
 	sun.shadow_enabled = true
+	sun.shadow_blur = 1.5
+	sun.directional_shadow_max_distance = 60.0
 	root.add_child(sun)
 
 
 static func _exterior(root: Node3D) -> void:
 	# Ground / street.
-	_box(root, Vector3(120, 0.2, 120), Vector3(0, -0.1, 0), _mat(Color(0.32, 0.32, 0.3), 0.95))
-	_box(root, Vector3(40, 0.05, 8), Vector3(0, 0.02, 13), _mat(Color(0.22, 0.22, 0.23), 0.9))
+	_box(root, Vector3(120, 0.2, 120), Vector3(0, -0.1, 0), MaterialLib.asphalt())
+	_box(root, Vector3(40, 0.05, 8), Vector3(0, 0.02, 13), MaterialLib.pbr("Road007", 0.09, Color(0.75, 0.75, 0.77)))
 	# Sidewalk in front of the store.
-	_box(root, Vector3(30, 0.08, 3), Vector3(0, 0.04, 9.6), _mat(Color(0.5, 0.48, 0.45), 0.9))
+	_box(root, Vector3(30, 0.08, 3), Vector3(0, 0.04, 9.6), MaterialLib.sidewalk())
 	# Neighboring building silhouettes.
 	for i in 3:
 		var h := 6.0 + i * 2.0
 		_box(root, Vector3(10, h, 8), Vector3(-28.0 + i * 1.5, h / 2.0, -18.0 - i * 6.0),
-			_mat(Color(0.35 + 0.04 * i, 0.34, 0.33), 0.9))
-	_box(root, Vector3(12, 9, 9), Vector3(26, 4.5, -14), _mat(Color(0.42, 0.4, 0.38), 0.9))
+			MaterialLib.bricks(Color(0.8 + 0.06 * i, 0.72, 0.68)))
+	_box(root, Vector3(12, 9, 9), Vector3(26, 4.5, -14), MaterialLib.bricks(Color(0.7, 0.68, 0.66)))
 	# Delivery van parked at the dispatch side.
 	var van := Node3D.new()
 	van.position = Vector3(17.5, 0, 2.0)
 	root.add_child(van)
-	var van_body := _mat(Color(0.85, 0.87, 0.88), 0.4, 0.3)
+	var van_body := MaterialLib.painted_metal(Color(1.9, 1.92, 1.94), 0.35)
 	_box(van, Vector3(2.2, 1.9, 4.6), Vector3(0, 1.15, 0), van_body, true)
 	_box(van, Vector3(2.1, 1.1, 1.4), Vector3(0, 0.75, 2.9), van_body, true)
 	var wheel_mat := _mat(Color(0.1, 0.1, 0.1), 0.95)
@@ -143,19 +154,19 @@ static func _exterior(root: Node3D) -> void:
 static func _shell(root: Node3D) -> void:
 	# Interior floors per zone.
 	_box(root, Vector3(15.6, 0.12, 17.6), Vector3(-6.2, 0.06, -1.2),
-		_mat(Color(0.42, 0.42, 0.43), 0.95), true)                                  # production concrete
+		MaterialLib.concrete_floor(), true)                                          # production concrete
 	_box(root, Vector3(12.4, 0.12, 6.4), Vector3(7.8, 0.06, 4.6),
-		_mat(Color(0.36, 0.3, 0.26), 0.85), true, "stage_floor_store")               # store wood
+		MaterialLib.wood_floor(), true, "stage_floor_store")                         # store wood
 	_box(root, Vector3(12.4, 0.12, 8.4), Vector3(7.8, 0.06, -5.0),
-		_mat(Color(0.38, 0.39, 0.42), 0.95), true)                                   # warehouse
+		MaterialLib.concrete_floor(Color(0.7, 0.71, 0.73)), true)                    # warehouse
 	_box(root, Vector3(12.4, 0.12, 2.8), Vector3(7.8, 0.06, 0.2),
-		_mat(Color(0.34, 0.34, 0.4), 0.9), true)                                     # office corridor
+		MaterialLib.carpet(), true)                                                  # office corridor
 	# Grime patches that disappear from stage 2 (renovation).
-	var grime := _mat(Color(0.2, 0.2, 0.18), 1.0)
+	var grime := MaterialLib.pbr("Concrete034", 0.5, Color(0.32, 0.31, 0.28))
 	for pos in [Vector3(-3, 0.13, -4), Vector3(-9, 0.13, 2), Vector3(0, 0.13, -7), Vector3(4, 0.13, 5.5)]:
 		_box(root, Vector3(2.5, 0.01, 2.0), pos, grime, false, "stage_grime")
-	var wall := _mat(Color(0.55, 0.55, 0.52), 0.9)
-	var wall_hi := _mat(Color(0.72, 0.74, 0.7), 0.8)
+	var wall := MaterialLib.plaster_wall()
+	var wall_hi := MaterialLib.plaster_wall(Color(0.9, 0.91, 0.88))
 	# Perimeter walls (south wall has door gap at x 5.9..8.1).
 	_box(root, Vector3(28.6, WALL_H, 0.3), Vector3(0, WALL_H / 2, -10.0), wall)      # north
 	_box(root, Vector3(0.3, WALL_H, 18.3), Vector3(-14.15, WALL_H / 2, -0.95), wall) # west
@@ -178,7 +189,7 @@ static func _shell(root: Node3D) -> void:
 	_box(root, Vector3(9.0, WALL_H, 0.3), Vector3(9.6, WALL_H / 2, 1.6), wall_hi)
 	# Ceiling.
 	_box(root, Vector3(28.6, 0.3, 18.3), Vector3(0, WALL_H + 0.15, -0.95),
-		_mat(Color(0.3, 0.31, 0.33), 0.95))
+		MaterialLib.corrugated(Color(0.5, 0.52, 0.55)))
 	# Exterior facade sign above the entrance.
 	var facade_sign := Label3D.new()
 	facade_sign.text = "GREEN EMPIRE"
@@ -192,7 +203,7 @@ static func _shell(root: Node3D) -> void:
 
 static func _interior(root: Node3D) -> void:
 	# Office desk + screen.
-	var desk := _mat(Color(0.4, 0.32, 0.24), 0.7)
+	var desk := MaterialLib.wood_floor(Color(0.55, 0.45, 0.36))
 	_box(root, Vector3(2.0, 0.06, 0.9), Vector3(11.5, 0.78, 0.4), desk)
 	_box(root, Vector3(0.08, 0.78, 0.08), Vector3(10.6, 0.39, 0.1), desk)
 	_box(root, Vector3(0.08, 0.78, 0.08), Vector3(12.4, 0.39, 0.1), desk)
@@ -205,9 +216,11 @@ static func _interior(root: Node3D) -> void:
 	screen.emission_energy_multiplier = 0.8
 	_box(root, Vector3(0.7, 0.45, 0.05), Vector3(11.5, 1.15, 0.15), screen, false)
 	# Staff room bench (north-east corner of office strip).
-	_box(root, Vector3(1.6, 0.45, 0.5), Vector3(13.0, 0.22, 0.9), _mat(Color(0.3, 0.35, 0.3), 0.8))
+	_box(root, Vector3(1.6, 0.45, 0.5), Vector3(13.0, 0.22, 0.9),
+		MaterialLib.wood_floor(Color(0.5, 0.55, 0.5)))
 	# Waiting bench + plant in store.
-	_box(root, Vector3(1.6, 0.45, 0.5), Vector3(12.5, 0.22, 6.8), _mat(Color(0.34, 0.28, 0.2), 0.8))
+	_box(root, Vector3(1.6, 0.45, 0.5), Vector3(12.5, 0.22, 6.8),
+		MaterialLib.wood_floor(Color(0.5, 0.42, 0.32)))
 	var pot := MeshInstance3D.new()
 	var pot_mesh := CylinderMesh.new()
 	pot_mesh.top_radius = 0.25
@@ -259,8 +272,8 @@ static func _lights(root: Node3D) -> void:
 		var l := OmniLight3D.new()
 		l.position = s[0]
 		l.light_color = s[1]
-		l.light_energy = 2.2
-		l.omni_range = 9.0
+		l.light_energy = 3.2
+		l.omni_range = 10.0
 		l.shadow_enabled = false
 		root.add_child(l)
 		var fixture := MeshInstance3D.new()

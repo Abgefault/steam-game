@@ -14,13 +14,8 @@ static func create() -> RackNode:
 
 
 func _build() -> void:
-	var steel := StandardMaterial3D.new()
-	steel.albedo_color = Color(0.85, 0.45, 0.15)
-	steel.metallic = 0.5
-	steel.roughness = 0.5
-	var shelf_mat := StandardMaterial3D.new()
-	shelf_mat.albedo_color = Color(0.5, 0.52, 0.55)
-	shelf_mat.metallic = 0.4
+	var steel := MaterialLib.red_rack_steel()
+	var shelf_mat := MaterialLib.diamond_plate(Color(0.7, 0.71, 0.74))
 	for x in [-1.4, 1.4]:
 		_mesh_box(Vector3(0.1, 3.0, 0.1), Vector3(x, 1.5, -0.5), steel)
 		_mesh_box(Vector3(0.1, 3.0, 0.1), Vector3(x, 1.5, 0.5), steel)
@@ -63,9 +58,7 @@ func _refresh() -> void:
 		total += int(lot.qty)
 	_label.text = "WAREHOUSE — %d units" % total
 	var boxes: int = clampi(total / 8, 0, 18)
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(0.72, 0.66, 0.55)
-	mat.roughness = 0.85
+	var mat := MaterialLib.cardboard()
 	for i in boxes:
 		var box := MeshInstance3D.new()
 		var mesh := BoxMesh.new()

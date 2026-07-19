@@ -11,18 +11,46 @@ distributed with the engine and available at
 https://github.com/godotengine/godot/blob/master/LICENSE.txt and
 https://godotengine.org/license.
 
-## Game assets
+## PBR texture library (CC0)
 
-All game assets in this repository are **original** and were created for this
-project. No third-party art, audio, fonts, or models are used.
+The materials under `assets/textures/` are from **ambientCG**
+(https://ambientcg.com), published under **Creative Commons CC0 1.0 Universal**
+(public-domain dedication — free for commercial use, no attribution required;
+attribution given here as a courtesy and provenance record).
+
+Downloaded 2026-07-19 as `<AssetID>_1K-JPG.zip` from
+`https://ambientcg.com/get?file=<AssetID>_1K-JPG.zip`; only the Color,
+NormalGL and Roughness maps are shipped:
+
+| AssetID | Used for |
+|---|---|
+| Concrete034 | Production/warehouse floors, grime patches |
+| WoodFloor051 | Store floor, shelves, counters, desk |
+| Metal030 | Machine bodies, fixtures, van, conveyor rails |
+| PaintedMetal004 | Red pallet-rack steel |
+| DiamondPlate006C | Machine service platforms, rack shelves |
+| Road007 | Street asphalt |
+| PavingStones128 | Sidewalk |
+| Bricks097 | Neighboring building exteriors |
+| Cardboard004 | Containers, product/stock boxes |
+| Plaster001 | Interior walls |
+| CorrugatedSteel007A | Ceiling deck |
+| Rubber004 | Conveyor belts |
+| Carpet016 | Office floor |
+
+License text: https://creativecommons.org/publicdomain/zero/1.0/
+
+## Original game assets
+
+All remaining assets are **original**, created for this project:
 
 - **Audio** — every sound and music loop is procedurally synthesized by
   `tools/generate_audio.py` (pure Python standard library, no samples). Output
   lives in `assets/audio/*.wav`. There is no sampled, recorded, or licensed
   audio in the project.
 - **3D models & environments** — built procedurally at runtime from Godot
-  primitive meshes (`scripts/world/*.gd`, `scripts/world/facility_builder.gd`).
-  No imported model files.
+  primitive meshes (`scripts/world/*.gd`, `scripts/world/facility_builder.gd`)
+  using the CC0 materials above. No imported model files.
 - **Icon** — `assets/icon.svg`, an original vector drawn for this project.
 - **UI** — built in code via `scripts/ui/ui_kit.gd`; fonts are Godot's built-in
   default font (covered by the engine's license above).

@@ -51,12 +51,14 @@ headless test suite, smoke tests, rendered screenshots, and the exported build.
 - [x] No secrets, no machine-specific paths committed
 
 ## Known limitations (honest)
-- Visual direction is a clean, readable, procedurally-built industrial look
-  (PBR-style materials, zone lighting) rather than authored AAA-photoreal art;
-  no external model/texture packs are used. This is intentional and consistent.
+- Visual direction: procedurally-built geometry now surfaced with a real CC0
+  PBR texture library (ambientCG — concrete, wood, plaster, metals, brick,
+  asphalt, cardboard, rubber; see THIRD_PARTY_LICENSES.md) plus SSAO/ACES
+  environment. Believable industrial look, though geometry detail remains
+  primitive-based rather than hand-modeled AAA assets.
 - The scripted economy bot demonstrates the intended single-store throughput
   ceiling and tends to fail the overdraft rule mid-run; a human who watches
   cash and times expansion has a verified path to qualification (trial win is
   covered by `final_trial_win` in the test suite).
-- 3D "fidelity to a Steam store page" is limited by a from-scratch procedural
-  art pipeline built without a modeling tool in this environment.
+- Remaining art gap to a AAA store page: hand-modeled hero props and
+  character models (people are stylized capsule figures).

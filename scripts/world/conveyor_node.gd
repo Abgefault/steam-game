@@ -31,18 +31,12 @@ func _ready() -> void:
 	var bed_mesh := BoxMesh.new()
 	bed_mesh.size = Vector3(length - 1.2, 0.08, 0.5)
 	bed.mesh = bed_mesh
-	var belt_mat := StandardMaterial3D.new()
-	belt_mat.albedo_color = Color(0.15, 0.16, 0.18)
-	belt_mat.roughness = 0.9
-	bed.material_override = belt_mat
+	bed.material_override = MaterialLib.rubber_belt()
 	position = Vector3(mid.x, 0.85, mid.z)
 	rotation.y = atan2(-dir.z, dir.x)
 	add_child(bed)
 	# Side rails + legs.
-	var rail_mat := StandardMaterial3D.new()
-	rail_mat.albedo_color = Color(0.6, 0.62, 0.65)
-	rail_mat.metallic = 0.6
-	rail_mat.roughness = 0.4
+	var rail_mat := MaterialLib.painted_metal(Color(1.1, 1.12, 1.15))
 	for zoff in [-0.28, 0.28]:
 		var rail := MeshInstance3D.new()
 		var rail_mesh := BoxMesh.new()
@@ -98,10 +92,7 @@ func _spawn_mover() -> void:
 	var mesh := BoxMesh.new()
 	mesh.size = Vector3(0.3, 0.24, 0.3)
 	box.mesh = mesh
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(0.55, 0.5, 0.4)
-	mat.roughness = 0.8
-	box.material_override = mat
+	box.material_override = MaterialLib.cardboard()
 	box.position = Vector3(-((_to_pos - _from_pos).length() - 1.2) / 2.0, 0.18, 0)
 	_mover_root.add_child(box)
 	_movers.append({"node": box, "t": 0.0})

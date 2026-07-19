@@ -27,7 +27,7 @@ func _ready() -> void:
 		"",
 		"Built with Godot Engine 4 (godotengine.org, MIT license)",
 		"All audio procedurally synthesized in-house.",
-		"No third-party game assets were used.",
+		"PBR textures: ambientCG.com (CC0 public domain).",
 	]:
 		var l := UIKit.label(line, UIKit.TEXT_DIM if line != "Industrial Cannabis Tycoon" else UIKit.TEXT)
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

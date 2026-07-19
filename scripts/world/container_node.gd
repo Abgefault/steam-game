@@ -16,13 +16,13 @@ static func create(out: Dictionary) -> ContainerNode:
 	box.size = Vector3(0.44, 0.34, 0.44)
 	mesh.mesh = box
 	mesh.position.y = 0.17
-	var mat := StandardMaterial3D.new()
+	var tint := Color(1, 1, 1)
 	match str(out.get("kind", "")):
-		"cultivation": mat.albedo_color = Color(0.32, 0.5, 0.3)
-		"conditioning": mat.albedo_color = Color(0.55, 0.47, 0.3)
-		"processing": mat.albedo_color = Color(0.35, 0.42, 0.55)
-		"packaged": mat.albedo_color = Color(0.72, 0.68, 0.6)
-	mat.roughness = 0.85
+		"cultivation": tint = Color(0.6, 0.85, 0.6)
+		"conditioning": tint = Color(0.95, 0.85, 0.6)
+		"processing": tint = Color(0.65, 0.75, 0.95)
+		"packaged": tint = Color(1.0, 0.98, 0.92)
+	var mat := MaterialLib.pbr("Cardboard004", 1.4, tint, false)
 	mesh.material_override = mat
 	node.add_child(mesh)
 	var lid := MeshInstance3D.new()
@@ -30,9 +30,7 @@ static func create(out: Dictionary) -> ContainerNode:
 	lid_mesh.size = Vector3(0.46, 0.05, 0.46)
 	lid.mesh = lid_mesh
 	lid.position.y = 0.36
-	var lid_mat := StandardMaterial3D.new()
-	lid_mat.albedo_color = mat.albedo_color.darkened(0.35)
-	lid_mat.roughness = 0.7
+	var lid_mat := MaterialLib.pbr("Cardboard004", 2.0, tint.darkened(0.25), false)
 	lid.material_override = lid_mat
 	node.add_child(lid)
 	var col := CollisionShape3D.new()

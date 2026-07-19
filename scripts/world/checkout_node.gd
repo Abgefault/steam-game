@@ -14,12 +14,8 @@ static func create(p_store_id: String) -> CheckoutNode:
 
 
 func _build() -> void:
-	var counter := StandardMaterial3D.new()
-	counter.albedo_color = Color(0.32, 0.26, 0.2)
-	counter.roughness = 0.6
-	var top := StandardMaterial3D.new()
-	top.albedo_color = Color(0.75, 0.73, 0.68)
-	top.roughness = 0.35
+	var counter := MaterialLib.pbr("WoodFloor051", 0.7, Color(0.5, 0.4, 0.32), false)
+	var top := MaterialLib.painted_metal(Color(1.4, 1.38, 1.32), 0.3)
 	_mesh_box(Vector3(1.8, 0.95, 0.7), Vector3(0, 0.475, 0), counter)
 	_mesh_box(Vector3(1.9, 0.06, 0.8), Vector3(0, 0.98, 0), top)
 	var register := StandardMaterial3D.new()

@@ -22,14 +22,12 @@ static func create(id: String) -> MachineNode:
 func _build() -> void:
 	var m: Dictionary = Game.state.machines.get(machine_id, {})
 	var def_id := str(m.get("def_id", "product"))
-	_body_mat = StandardMaterial3D.new()
-	_body_mat.albedo_color = Color(0.58, 0.6, 0.62)
-	_body_mat.metallic = 0.55
-	_body_mat.roughness = 0.45
-	var accent := StandardMaterial3D.new()
-	accent.albedo_color = _accent_color(def_id)
-	accent.metallic = 0.3
-	accent.roughness = 0.5
+	_body_mat = MaterialLib.pbr("Metal030", 0.6, Color(2.1, 2.14, 2.16), false, 0.45)
+	var accent_base := _accent_color(def_id)
+	var accent := MaterialLib.pbr("Metal030", 0.8,
+		Color(accent_base.r * 2.6, accent_base.g * 2.6, accent_base.b * 2.6), false, 0.3)
+	# Industrial diamond-plate service platform under every machine.
+	_box(Vector3(2.4, 0.06, 1.5), Vector3(0, 0.03, 0), MaterialLib.diamond_plate())
 	# Distinct silhouettes per machine type, assembled from primitives.
 	match def_id:
 		"cultivation":
