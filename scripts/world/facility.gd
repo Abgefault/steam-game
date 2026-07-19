@@ -27,6 +27,11 @@ func _ready() -> void:
 		var node := MachineNode.create(machine_id)
 		node.position = pos
 		add_child(node)
+	# The visible cultivation farm (plants mirror the machine's progress).
+	var farm := FarmZone.new()
+	farm.position = Vector3(-11.6, 0, -6.0)
+	farm.rotation_degrees.y = 90
+	add_child(farm)
 	# Store fixtures.
 	var shelf := ShelfNode.create("store_old_market")
 	shelf.position = Vector3(6.0, 0, 3.0)

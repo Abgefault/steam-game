@@ -9,7 +9,7 @@ class_name FacilityBuilder
 const WALL_H := 4.0
 
 static var machine_positions := {
-	"m_cultivation_1": Vector3(-11.5, 0, -6.0),
+	"m_cultivation_1": Vector3(-8.6, 0, -8.3),
 	"m_conditioning_1": Vector3(-8.0, 0, -6.0),
 	"m_processing_1": Vector3(-4.5, 0, -6.0),
 	"m_lab_1": Vector3(-11.5, 0, -0.5),

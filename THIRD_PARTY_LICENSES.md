@@ -51,6 +51,9 @@ All remaining assets are **original**, created for this project:
 - **3D models & environments** — built procedurally at runtime from Godot
   primitive meshes (`scripts/world/*.gd`, `scripts/world/facility_builder.gd`)
   using the CC0 materials above. No imported model files.
+- **Sprites/decals** — `assets/textures/plant/leaf.png` (stylized leaf) and
+  `assets/textures/hazard/color.jpg` (hazard stripes) are original, generated
+  procedurally by `tools/generate_sprites.py`.
 - **Icon** — `assets/icon.svg`, an original vector drawn for this project.
 - **UI** — built in code via `scripts/ui/ui_kit.gd`; fonts are Godot's built-in
   default font (covered by the engine's license above).

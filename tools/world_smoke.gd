@@ -25,21 +25,36 @@ func _run() -> void:
 	await get_tree().create_timer(6.0).timeout
 	print("[WSMOKE] sim time now %s, customers today: %d" % [SimClock.time_string(),
 		int(Game.state.daily.customers)])
-	# Exercise the tablet and a machine dialog.
+	# Exercise the tablet (the machine dialog is opened later, after the
+	# clean world screenshots).
 	var hud: CanvasLayer = facility.get("hud")
 	if hud != null:
 		hud.call("toggle_tablet")
 		await get_tree().process_frame
 		hud.call("toggle_tablet")
-		hud.call("open_machine_dialog", "m_product_1")
-		await get_tree().process_frame
 	else:
 		failed = true
 	print("[WSMOKE] UI exercised")
 	var want_shots := "--screenshot" in OS.get_cmdline_user_args() and DisplayServer.get_name() != "headless"
 	var dir := OS.get_environment("GE_SHOT_DIR")
 	if want_shots and dir != "":
-		# Facility with the machine dialog already open.
+		# Farm view: park the player in front of the cultivation zone.
+		var player: Player = facility.get("player")
+		if player != null:
+			player.global_position = Vector3(-6.0, 0.1, -3.2)
+			player.rotation.y = deg_to_rad(60.0)
+			player.camera.rotation.x = -0.06
+			await get_tree().create_timer(0.3).timeout
+			await _shot(dir + "/farm.png")
+			# Machine row view.
+			player.global_position = Vector3(-1.5, 0.1, -3.0)
+			player.rotation.y = deg_to_rad(76.0)
+			await get_tree().create_timer(0.3).timeout
+			await _shot(dir + "/machines.png")
+		# Facility with the machine dialog open.
+		if hud != null:
+			hud.call("open_machine_dialog", "m_product_1")
+			await get_tree().process_frame
 		await _shot(dir + "/facility.png")
 		# Tablet (full-rect, drawn over everything).
 		if hud != null:
