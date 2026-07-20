@@ -67,8 +67,8 @@ static func diamond_plate(tint: Color = Color(0.8, 0.8, 0.82)) -> StandardMateri
 	return pbr("DiamondPlate006C", 0.7, tint, true, 0.75)
 
 
-static func corrugated(tint: Color = Color(0.6, 0.62, 0.65)) -> StandardMaterial3D:
-	return pbr("CorrugatedSteel007A", 0.3, tint, true, 0.12, 1.0)
+static func corrugated(tint: Color = Color(0.55, 0.57, 0.6)) -> StandardMaterial3D:
+	return pbr("CorrugatedSteel007A", 0.55, tint, true, 0.05, 1.0)
 
 
 static func asphalt() -> StandardMaterial3D:

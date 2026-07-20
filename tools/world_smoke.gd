@@ -51,6 +51,12 @@ func _run() -> void:
 			player.rotation.y = deg_to_rad(76.0)
 			await get_tree().create_timer(0.3).timeout
 			await _shot(dir + "/machines.png")
+			# Store view.
+			player.global_position = Vector3(11.5, 0.1, 5.8)
+			player.rotation.y = deg_to_rad(73.0)
+			player.camera.rotation.x = -0.04
+			await get_tree().create_timer(0.3).timeout
+			await _shot(dir + "/store.png")
 		# Facility with the machine dialog open.
 		if hud != null:
 			hud.call("open_machine_dialog", "m_product_1")

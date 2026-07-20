@@ -24,6 +24,7 @@ static func build(root: Node3D) -> Dictionary:
 	_exterior(root)
 	_shell(root)
 	_interior(root)
+	_props(root)
 	_lights(root)
 	anchors["entrance"] = Vector3(7.0, 0, 9.5)
 	anchors["door"] = Vector3(7.0, 0, 6.5)
@@ -80,7 +81,7 @@ static func _environment(root: Node3D) -> void:
 	sky.sky_material = sky_mat
 	env.sky = sky
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
-	env.ambient_light_energy = 0.85
+	env.ambient_light_energy = 0.5
 	env.tonemap_mode = Environment.TONE_MAPPER_ACES
 	env.tonemap_exposure = 1.05
 	# SSAO grounds objects in Forward+; ignored gracefully in compatibility.
@@ -176,11 +177,22 @@ static func _shell(root: Node3D) -> void:
 	_box(root, Vector3(2.2, WALL_H - 2.4, 0.3), Vector3(7.0, WALL_H - 1.2 + 0.0, 8.0), wall) # door lintel
 	# Storefront window band on the south wall (non-colliding glass).
 	var glass := StandardMaterial3D.new()
-	glass.albedo_color = Color(0.6, 0.75, 0.8, 0.25)
+	glass.albedo_color = Color(0.7, 0.85, 0.95, 0.22)
 	glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	glass.roughness = 0.05
 	glass.metallic = 0.2
+	glass.emission_enabled = true
+	glass.emission = Color(0.75, 0.85, 0.95)
+	glass.emission_energy_multiplier = 0.35
 	_box(root, Vector3(5.5, 1.6, 0.1), Vector3(11.0, 2.0, 8.0), glass, false)
+	# Daylight spilling in through the storefront window.
+	var window_light := OmniLight3D.new()
+	window_light.position = Vector3(11.0, 2.2, 6.5)
+	window_light.light_color = Color(0.85, 0.9, 1.0)
+	window_light.light_energy = 1.6
+	window_light.omni_range = 6.0
+	window_light.shadow_enabled = false
+	root.add_child(window_light)
 	# Interior dividers: store/warehouse vs production (x=1.6), with door gaps.
 	_box(root, Vector3(0.3, WALL_H, 6.0), Vector3(1.6, WALL_H / 2, 5.0), wall_hi)
 	_box(root, Vector3(0.3, WALL_H, 7.0), Vector3(1.6, WALL_H / 2, -6.5), wall_hi)
@@ -254,6 +266,175 @@ static func _interior(root: Node3D) -> void:
 	locked_sign.pixel_size = 0.005
 	locked_sign.modulate = Color(0.8, 0.75, 0.6)
 	root.add_child(locked_sign)
+
+
+## Clutter and dressing that makes the halls feel worked-in.
+static func _props(root: Node3D) -> void:
+	# Painted floor lanes framing the production aisle.
+	var lane := _mat(Color(0.85, 0.75, 0.2), 0.9)
+	for z in [-7.9, -3.9, 1.2]:
+		_box(root, Vector3(11.5, 0.012, 0.09), Vector3(-7.4, 0.13, z), lane, false)
+	_box(root, Vector3(0.09, 0.012, 9.0), Vector3(-1.8, 0.13, -3.4), lane, false)
+	# Painted zone names on the floor.
+	for zone in [["PRODUCTION", Vector3(-5.5, 0.14, -2.6), 0.0],
+			["WAREHOUSE", Vector3(7.5, 0.14, -3.0), 0.0],
+			["DISPATCH", Vector3(11.5, 0.14, -7.5), 90.0]]:
+		var t := Label3D.new()
+		t.text = str(zone[0])
+		t.position = zone[1]
+		t.rotation_degrees = Vector3(-90, zone[2], 0)
+		t.font_size = 96
+		t.pixel_size = 0.005
+		t.modulate = Color(0.9, 0.85, 0.5, 0.32)
+		root.add_child(t)
+	# Wooden pallets with cardboard stacks (warehouse + dispatch).
+	for pos in [Vector3(4.2, 0, -6.8), Vector3(12.2, 0, -6.2), Vector3(3.6, 0, -3.2)]:
+		_pallet(root, pos, randf() > 0.3)
+	# Blue supply barrels near processing.
+	var barrel_mat := MaterialLib.painted_metal(Color(0.35, 0.55, 1.4), 0.45)
+	for i in 3:
+		var b := MeshInstance3D.new()
+		var bm := CylinderMesh.new()
+		bm.top_radius = 0.3
+		bm.bottom_radius = 0.3
+		bm.height = 0.85
+		b.mesh = bm
+		b.position = Vector3(-2.6 + (i % 2) * 0.7, 0.425, -8.6 + (i >> 1) * 0.7)
+		b.material_override = barrel_mat
+		root.add_child(b)
+		var body := StaticBody3D.new()
+		var col := CollisionShape3D.new()
+		var shape := CylinderShape3D.new()
+		shape.radius = 0.3
+		shape.height = 0.85
+		col.shape = shape
+		body.add_child(col)
+		b.add_child(body)
+	# Wall conduit run + cable tray along the production north wall.
+	var conduit := MaterialLib.painted_metal(Color(1.3, 1.32, 1.35))
+	for cy in [2.6, 2.75]:
+		_box(root, Vector3(11.0, 0.05, 0.05), Vector3(-7.5, cy, -9.85), conduit, false)
+	_box(root, Vector3(11.0, 0.02, 0.3), Vector3(-7.5, 3.3, -9.8), conduit, false)
+	# Fire extinguisher by the store door.
+	var ext := MeshInstance3D.new()
+	var ext_mesh := CylinderMesh.new()
+	ext_mesh.top_radius = 0.09
+	ext_mesh.bottom_radius = 0.09
+	ext_mesh.height = 0.5
+	ext.mesh = ext_mesh
+	ext.position = Vector3(1.9, 1.1, 6.6)
+	ext.material_override = MaterialLib.painted_metal(Color(1.6, 0.25, 0.2), 0.4)
+	root.add_child(ext)
+	# Store dressing: doormat, pendant lamps, decor plants, leaf posters.
+	_box(root, Vector3(1.8, 0.02, 1.0), Vector3(7.0, 0.13, 6.9),
+		MaterialLib.pbr("Carpet016", 0.8, Color(0.35, 0.4, 0.38)), false)
+	for px in [6.0, 9.5]:
+		_pendant(root, Vector3(px, 0, 3.0))
+	for pos in [Vector3(3.2, 0, 6.9), Vector3(12.9, 0, 2.3)]:
+		var plant := PlantNode.create(true)
+		plant.position = pos
+		plant.scale = Vector3(1.5, 1.5, 1.5)
+		root.add_child(plant)
+	var leaf_tex: Texture2D = load("res://assets/textures/plant/leaf.png")
+	for poster in [[Vector3(4.6, 2.3, 7.83), 0.0], [Vector3(11.2, 2.3, 7.83), 0.0]]:
+		_box(root, Vector3(1.0, 1.4, 0.04), poster[0], _mat(Color(0.16, 0.24, 0.19), 0.7), false)
+		var quad := MeshInstance3D.new()
+		var qm := QuadMesh.new()
+		qm.size = Vector2(0.8, 0.8)
+		quad.mesh = qm
+		quad.position = (poster[0] as Vector3) + Vector3(0, 0.15, -0.03)
+		quad.rotation_degrees.y = 180.0
+		var pm := StandardMaterial3D.new()
+		pm.albedo_texture = leaf_tex
+		pm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
+		pm.alpha_scissor_threshold = 0.4
+		root.add_child(quad)
+		quad.material_override = pm
+		var caption := Label3D.new()
+		caption.text = "GREEN EMPIRE"
+		caption.position = (poster[0] as Vector3) + Vector3(0, -0.5, -0.03)
+		caption.rotation_degrees.y = 180.0
+		caption.font_size = 40
+		caption.pixel_size = 0.005
+		caption.modulate = Color(0.6, 0.85, 0.65)
+		root.add_child(caption)
+	# Office: task chair + binder shelf.
+	var chair_mat := _mat(Color(0.15, 0.16, 0.18), 0.7)
+	_box(root, Vector3(0.45, 0.06, 0.45), Vector3(11.5, 0.48, 1.1), chair_mat)
+	_box(root, Vector3(0.45, 0.5, 0.06), Vector3(11.5, 0.78, 1.32), chair_mat, false)
+	_cyl_prop(root, 0.04, 0.42, Vector3(11.5, 0.24, 1.1), chair_mat)
+	_box(root, Vector3(1.4, 0.04, 0.3), Vector3(13.2, 1.6, 0.2), MaterialLib.wood_floor(Color(0.5, 0.42, 0.34)), false)
+	for i in 6:
+		_box(root, Vector3(0.12, 0.3, 0.24), Vector3(12.7 + i * 0.16, 1.78, 0.2),
+			_mat([Color(0.5, 0.25, 0.2), Color(0.2, 0.35, 0.5), Color(0.25, 0.45, 0.3),
+				Color(0.6, 0.5, 0.25)].pick_random(), 0.7), false)
+	# Fake skylight strips brighten the production hall naturally.
+	var sky_mat := StandardMaterial3D.new()
+	sky_mat.albedo_color = Color(0.9, 0.95, 1.0)
+	sky_mat.emission_enabled = true
+	sky_mat.emission = Color(0.85, 0.9, 1.0)
+	sky_mat.emission_energy_multiplier = 2.0
+	for sx in [-9.0, -4.0]:
+		_box(root, Vector3(3.0, 0.04, 1.2), Vector3(sx, WALL_H - 0.02, -4.0), sky_mat, false)
+
+
+static func _pallet(root: Node3D, pos: Vector3, with_boxes: bool) -> void:
+	var wood := MaterialLib.wood_floor(Color(0.75, 0.65, 0.5))
+	for i in 5:
+		_box(root, Vector3(1.1, 0.04, 0.16), pos + Vector3(0, 0.13, -0.44 + i * 0.22), wood)
+	for zoff in [-0.45, 0.0, 0.45]:
+		_box(root, Vector3(1.1, 0.09, 0.1), pos + Vector3(0, 0.06, zoff), wood)
+	if with_boxes:
+		var card := MaterialLib.cardboard()
+		_box(root, Vector3(0.5, 0.42, 0.5), pos + Vector3(-0.25, 0.38, -0.1), card)
+		_box(root, Vector3(0.45, 0.36, 0.45), pos + Vector3(0.28, 0.35, 0.12), card)
+		_box(root, Vector3(0.42, 0.34, 0.42), pos + Vector3(0.0, 0.75, 0.0), card)
+
+
+static func _pendant(root: Node3D, pos: Vector3) -> void:
+	var metal := MaterialLib.painted_metal(Color(0.3, 0.32, 0.34))
+	_cyl_prop(root, 0.015, 1.0, pos + Vector3(0, WALL_H - 0.55, 0), metal)
+	var shade := MeshInstance3D.new()
+	var sm := CylinderMesh.new()
+	sm.top_radius = 0.06
+	sm.bottom_radius = 0.22
+	sm.height = 0.22
+	shade.mesh = sm
+	shade.position = pos + Vector3(0, WALL_H - 1.1, 0)
+	shade.material_override = metal
+	root.add_child(shade)
+	var bulb := MeshInstance3D.new()
+	var bm := SphereMesh.new()
+	bm.radius = 0.07
+	bm.height = 0.14
+	bulb.mesh = bm
+	bulb.position = pos + Vector3(0, WALL_H - 1.2, 0)
+	var glow := StandardMaterial3D.new()
+	glow.albedo_color = Color(1.0, 0.9, 0.7)
+	glow.emission_enabled = true
+	glow.emission = Color(1.0, 0.85, 0.6)
+	glow.emission_energy_multiplier = 2.5
+	bulb.material_override = glow
+	root.add_child(bulb)
+	var l := OmniLight3D.new()
+	l.position = pos + Vector3(0, WALL_H - 1.3, 0)
+	l.light_color = Color(1.0, 0.88, 0.7)
+	l.light_energy = 2.0
+	l.omni_range = 5.0
+	l.shadow_enabled = false
+	root.add_child(l)
+
+
+static func _cyl_prop(root: Node3D, radius: float, height: float, pos: Vector3, mat: Material) -> void:
+	var mi := MeshInstance3D.new()
+	var mesh := CylinderMesh.new()
+	mesh.top_radius = radius
+	mesh.bottom_radius = radius
+	mesh.height = height
+	mi.mesh = mesh
+	mi.position = pos
+	mi.material_override = mat
+	root.add_child(mi)
 
 
 static func _lights(root: Node3D) -> void:

@@ -11,28 +11,67 @@ var _bubble_timer := 0.0
 
 
 func build_visual(body_color: Color, height: float = 1.7) -> void:
+	# Pants (lower body).
+	var pants := MeshInstance3D.new()
+	var pants_mesh := CylinderMesh.new()
+	pants_mesh.top_radius = 0.21
+	pants_mesh.bottom_radius = 0.17
+	pants_mesh.height = height * 0.42
+	pants.mesh = pants_mesh
+	pants.position.y = height * 0.24
+	var pants_mat := StandardMaterial3D.new()
+	pants_mat.albedo_color = [Color(0.16, 0.17, 0.2), Color(0.22, 0.2, 0.18),
+		Color(0.15, 0.2, 0.26)].pick_random()
+	pants_mat.roughness = 0.95
+	pants.material_override = pants_mat
+	add_child(pants)
+	# Shirt/torso.
 	var body := MeshInstance3D.new()
 	var capsule := CapsuleMesh.new()
-	capsule.radius = 0.26
-	capsule.height = height - 0.3
+	capsule.radius = 0.24
+	capsule.height = height * 0.62
 	body.mesh = capsule
-	body.position.y = (height - 0.3) / 2.0 + 0.15
+	body.position.y = height * 0.62
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = body_color
 	mat.roughness = 0.9
 	body.material_override = mat
 	add_child(body)
+	# Arms.
+	var arm_mesh := CapsuleMesh.new()
+	arm_mesh.radius = 0.055
+	arm_mesh.height = height * 0.42
+	for side in [-1.0, 1.0]:
+		var arm := MeshInstance3D.new()
+		arm.mesh = arm_mesh
+		arm.position = Vector3(side * 0.29, height * 0.62, 0)
+		arm.rotation_degrees.z = side * -8.0
+		arm.material_override = mat
+		add_child(arm)
+	# Head + hair.
 	var head := MeshInstance3D.new()
 	var sphere := SphereMesh.new()
-	sphere.radius = 0.16
-	sphere.height = 0.32
+	sphere.radius = 0.15
+	sphere.height = 0.3
 	head.mesh = sphere
-	head.position.y = height - 0.05
+	head.position.y = height - 0.04
 	var skin := StandardMaterial3D.new()
-	skin.albedo_color = Color(0.85, 0.7, 0.58).lerp(Color(0.45, 0.32, 0.24), randf())
+	skin.albedo_color = Color(0.87, 0.72, 0.6).lerp(Color(0.42, 0.3, 0.22), randf())
 	skin.roughness = 0.95
 	head.material_override = skin
 	add_child(head)
+	var hair := MeshInstance3D.new()
+	var hair_mesh := SphereMesh.new()
+	hair_mesh.radius = 0.155
+	hair_mesh.height = 0.2
+	hair.mesh = hair_mesh
+	hair.position.y = height + 0.05
+	var hair_mat := StandardMaterial3D.new()
+	hair_mat.albedo_color = [Color(0.12, 0.1, 0.08), Color(0.3, 0.2, 0.1),
+		Color(0.5, 0.42, 0.3), Color(0.25, 0.25, 0.28), Color(0.55, 0.3, 0.15)].pick_random()
+	hair_mat.roughness = 0.95
+	hair.material_override = hair_mat
+	add_child(hair)
 	var col := CollisionShape3D.new()
 	var shape := CapsuleShape3D.new()
 	shape.radius = 0.26
