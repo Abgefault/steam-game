@@ -111,17 +111,13 @@ static func _environment(root: Node3D) -> void:
 
 
 static func _exterior(root: Node3D) -> void:
-	# Ground / street.
-	_box(root, Vector3(120, 0.2, 120), Vector3(0, -0.1, 0), MaterialLib.asphalt())
-	_box(root, Vector3(40, 0.05, 8), Vector3(0, 0.02, 13), MaterialLib.pbr("Road007", 0.09, Color(0.75, 0.75, 0.77)))
-	# Sidewalk in front of the store.
-	_box(root, Vector3(30, 0.08, 3), Vector3(0, 0.04, 9.6), MaterialLib.sidewalk())
-	# Neighboring building silhouettes.
-	for i in 3:
-		var h := 6.0 + i * 2.0
-		_box(root, Vector3(10, h, 8), Vector3(-28.0 + i * 1.5, h / 2.0, -18.0 - i * 6.0),
-			MaterialLib.bricks(Color(0.8 + 0.06 * i, 0.72, 0.68)))
-	_box(root, Vector3(12, 9, 9), Vector3(26, 4.5, -14), MaterialLib.bricks(Color(0.7, 0.68, 0.66)))
+	# Ground plane.
+	_box(root, Vector3(220, 0.2, 220), Vector3(0, -0.1, 0), MaterialLib.asphalt())
+	# Wide sidewalk in front of the store.
+	_box(root, Vector3(40, 0.12, 5), Vector3(0, 0.06, 9.0), MaterialLib.sidewalk())
+	# A full city block around the shop (streets, buildings, cars, trees).
+	CityBuilder.build(root)
+	_storefront(root)
 	# Delivery van parked at the dispatch side.
 	var van := Node3D.new()
 	van.position = Vector3(17.5, 0, 2.0)
@@ -150,6 +146,70 @@ static func _exterior(root: Node3D) -> void:
 	sign.pixel_size = 0.008
 	sign.modulate = Color(0.2, 0.55, 0.3)
 	van.add_child(sign)
+
+
+## Dresses the shop's street-facing wall (south, z≈8) into a real storefront:
+## a fabric awning over the entrance and window, a projecting blade sign, warm
+## light spilling through the glass, and a sidewalk A-frame.
+static func _storefront(root: Node3D) -> void:
+	var brand := Color(0.22, 0.55, 0.32)
+	# Facade band above the shopfront in company brick/green.
+	_box(root, Vector3(13.5, 0.6, 0.3), Vector3(8.0, 3.5, 8.16), _mat(brand.darkened(0.1), 0.6))
+	# Striped fabric awning over entrance + window (angled down toward street).
+	var awning := StandardMaterial3D.new()
+	awning.albedo_color = brand
+	awning.roughness = 0.85
+	var awning_node := MeshInstance3D.new()
+	var am := BoxMesh.new()
+	am.size = Vector3(13.0, 0.08, 1.6)
+	awning_node.mesh = am
+	awning_node.position = Vector3(8.0, 3.05, 9.0)
+	awning_node.rotation_degrees.x = 18.0
+	awning_node.material_override = awning
+	root.add_child(awning_node)
+	# Awning valance (scalloped front lip).
+	_box(root, Vector3(13.0, 0.28, 0.05), Vector3(8.0, 2.62, 9.78), awning)
+	# Support struts.
+	var strut := MaterialLib.dark_steel(Color(0.3, 0.31, 0.33))
+	for sx in [2.0, 8.0, 14.0]:
+		_box(root, Vector3(0.05, 0.05, 1.6), Vector3(sx, 3.0, 9.0), strut, false)
+	# Warm light spilling out through the shopfront glass.
+	var shop_glow := OmniLight3D.new()
+	shop_glow.position = Vector3(11.0, 1.8, 8.6)
+	shop_glow.light_color = Color(1.0, 0.85, 0.6)
+	shop_glow.light_energy = 2.2
+	shop_glow.omni_range = 5.0
+	shop_glow.shadow_enabled = false
+	root.add_child(shop_glow)
+	# Projecting blade sign perpendicular to the wall.
+	_box(root, Vector3(0.12, 1.4, 1.9), Vector3(2.2, 3.4, 9.0), _mat(brand.darkened(0.15), 0.5))
+	var blade := Label3D.new()
+	blade.text = "GREEN\nEMPIRE"
+	blade.position = Vector3(2.1, 3.4, 9.0)
+	blade.rotation_degrees.y = -90
+	blade.font_size = 64
+	blade.pixel_size = 0.006
+	blade.outline_size = 12
+	blade.modulate = Color(0.75, 0.95, 0.78)
+	root.add_child(blade)
+	# Sidewalk A-frame chalkboard sign.
+	var board := _mat(Color(0.1, 0.11, 0.1), 0.9)
+	for zoff in [-0.15, 0.15]:
+		var panel := MeshInstance3D.new()
+		var pm := BoxMesh.new()
+		pm.size = Vector3(0.7, 1.0, 0.04)
+		panel.mesh = pm
+		panel.position = Vector3(5.0, 0.6, 9.9 + zoff)
+		panel.rotation_degrees.x = 12.0 * (1 if zoff > 0 else -1)
+		panel.material_override = board
+		root.add_child(panel)
+	var chalk := Label3D.new()
+	chalk.text = "OPEN\nTODAY"
+	chalk.position = Vector3(5.0, 0.7, 9.72)
+	chalk.font_size = 40
+	chalk.pixel_size = 0.004
+	chalk.modulate = Color(0.8, 0.95, 0.82)
+	root.add_child(chalk)
 
 
 static func _shell(root: Node3D) -> void:

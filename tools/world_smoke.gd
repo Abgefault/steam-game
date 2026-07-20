@@ -57,6 +57,24 @@ func _run() -> void:
 			player.camera.rotation.x = -0.04
 			await get_tree().create_timer(0.3).timeout
 			await _shot(dir + "/store.png")
+			# City view: stand on the sidewalk, look across the avenue.
+			player.global_position = Vector3(2.0, 0.1, 9.5)
+			player.rotation.y = deg_to_rad(178.0)
+			player.camera.rotation.x = 0.02
+			await get_tree().create_timer(0.4).timeout
+			await _shot(dir + "/city.png")
+			# Street view: look down the avenue past the storefront.
+			player.global_position = Vector3(-9.0, 0.1, 13.0)
+			player.rotation.y = deg_to_rad(75.0)
+			player.camera.rotation.x = 0.0
+			await get_tree().create_timer(0.4).timeout
+			await _shot(dir + "/street.png")
+			# Storefront: stand across the avenue and look back at the shop.
+			player.global_position = Vector3(9.0, 0.1, 20.0)
+			player.rotation.y = deg_to_rad(-6.0)
+			player.camera.rotation.x = 0.05
+			await get_tree().create_timer(0.4).timeout
+			await _shot(dir + "/storefront.png")
 		# Facility with the machine dialog open.
 		if hud != null:
 			hud.call("open_machine_dialog", "m_product_1")

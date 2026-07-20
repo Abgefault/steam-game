@@ -40,6 +40,16 @@ First complete, playable release.
   6 machine types × 5 tiers. All data-driven in `data/*.json`.
 
 ### Presentation
+- Full city block around the shop: an east-west avenue with lane markings and
+  a zebra crossing, textured buildings on both sides (glass office towers,
+  brick mixed-use, concrete/glass towers) with rooftop HVAC and a lit distant
+  skyline, plus street lamps, benches, bins, a bus shelter, traffic light,
+  fire hydrant, parked cars, and street trees in planters.
+- Storefront dressing facing the street: green awning, projecting blade sign,
+  facade sign, warm light through the shopfront glass, and a sidewalk A-frame.
+- Photoreal material detail on machines (2K brushed steel/stainless), hardware
+  props (bolts, valves, gauges, handles, nameplates), ceiling I-beam trusses,
+  reflection probes, and dressed characters (clothes + hair).
 - Procedural 3D facility (storefront, production hall, warehouse, office,
   exterior street, delivery van) with PBR-style materials and zone lighting.
 - Original synthesized audio: menu/calm/tension music, store/office/workshop

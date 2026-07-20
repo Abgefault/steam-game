@@ -110,3 +110,27 @@ static func plastic(tint: Color = Color(1, 1, 1)) -> StandardMaterial3D:
 
 static func dark_steel(tint: Color = Color(0.35, 0.36, 0.38)) -> StandardMaterial3D:
 	return pbr("Metal030", 0.8, tint, true, 0.75, 1.0)
+
+
+# --- City facades. World-triplanar so the window grid tiles consistently on
+# every wall of a building box, at roughly floor scale (~1 tile / 14 m). ---
+
+static func facade(id: String, tint: Color = Color(1, 1, 1), floors_per_tile: float = 14.0,
+		lit: bool = false) -> StandardMaterial3D:
+	var m := pbr(id, 1.0 / floors_per_tile, tint, true, 0.15, 1.0)
+	m.metallic = 0.25 if id in ["Facade006", "Facade019A"] else 0.0
+	if lit:
+		# Emissive windows for evening/distant buildings.
+		if ResourceLoader.exists("res://assets/textures/%s/color.jpg" % id):
+			m.emission_enabled = true
+			m.emission_texture = load("res://assets/textures/%s/color.jpg" % id)
+			m.emission_energy_multiplier = 0.5
+	return m
+
+
+static func roof_tiles(tint: Color = Color(0.75, 0.72, 0.7)) -> StandardMaterial3D:
+	return pbr("RoofingTiles013A", 0.35, tint)
+
+
+static func city_concrete(tint: Color = Color(0.82, 0.82, 0.8)) -> StandardMaterial3D:
+	return pbr("Concrete046", 0.3, tint)

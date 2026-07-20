@@ -40,6 +40,12 @@ NormalGL and Roughness maps are shipped:
 | Metal009 (2K) | Machine bodies (brushed steel) |
 | Metal012 (2K) | Stainless tanks, lab bench, counter tops |
 | Plastic010 | Analyzer housings, plastic details |
+| Facade006 | Glass office towers (city) |
+| Facade012 | Distant lit office windows (city skyline) |
+| Facade018A | Brick mixed-use buildings (city) |
+| Facade019A | Concrete/glass towers (city) |
+| Concrete046 | Building parapets, curbs, planters |
+| RoofingTiles013A | Roof surfaces |
 
 License text: https://creativecommons.org/publicdomain/zero/1.0/
 
