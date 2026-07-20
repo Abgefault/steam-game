@@ -32,6 +32,8 @@ func _ready() -> void:
 	farm.position = Vector3(-11.6, 0, -6.0)
 	farm.rotation_degrees.y = 90
 	add_child(farm)
+	# Living city: moving traffic and pedestrians.
+	add_child(CityLife.new())
 	# Store fixtures.
 	var shelf := ShelfNode.create("store_old_market")
 	shelf.position = Vector3(6.0, 0, 3.0)

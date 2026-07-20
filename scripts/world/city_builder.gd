@@ -64,23 +64,38 @@ static func _cyl(root: Node3D, r: float, h: float, pos: Vector3, mat: Material,
 # ------------------------------------------------------------------ ground
 
 static func _ground(root: Node3D) -> void:
-	# Large asphalt ground plane already exists from FacilityBuilder; add the
-	# avenue, opposite sidewalk, road markings and a crosswalk in front.
-	_box(root, Vector3(140, 0.04, 12), Vector3(0, 0.04, 18), MaterialLib.asphalt())
-	# Far sidewalk across the avenue.
-	_box(root, Vector3(140, 0.12, 5), Vector3(0, 0.06, 26.5), MaterialLib.sidewalk())
-	# Curbs.
+	# A multi-block grid: two east-west avenues plus two north-south cross
+	# streets, with sidewalks between them. The big asphalt plane comes from
+	# FacilityBuilder; here we lay pavement, curbs and markings.
+	var road := MaterialLib.asphalt()
+	var walk := MaterialLib.sidewalk()
 	var curb := MaterialLib.city_concrete(Color(0.7, 0.7, 0.68))
-	_box(root, Vector3(140, 0.22, 0.4), Vector3(0, 0.11, 11.9), curb)
-	_box(root, Vector3(140, 0.22, 0.4), Vector3(0, 0.11, 24.0), curb)
-	# Centre lane dashes.
 	var paint := _mat(Color(0.85, 0.82, 0.4), 0.7)
-	for x in range(-60, 61, 6):
-		_box(root, Vector3(2.2, 0.01, 0.16), Vector3(x, 0.07, 18.0), paint, false)
+	var zebra := _mat(Color(0.9, 0.9, 0.88), 0.6)
+	# Two east-west avenues (near = the shop's, far = one block south).
+	for z in [18.0, 50.0]:
+		_box(root, Vector3(260, 0.04, 12), Vector3(0, 0.04, z), road)
+		_box(root, Vector3(260, 0.22, 0.4), Vector3(0, 0.11, z - 6.1), curb)
+		_box(root, Vector3(260, 0.22, 0.4), Vector3(0, 0.11, z + 6.1), curb)
+		for x in range(-120, 121, 6):
+			_box(root, Vector3(2.2, 0.01, 0.16), Vector3(x, 0.07, z), paint, false)
+	# North-south cross streets.
+	for cx in [-46.0, 46.0]:
+		_box(root, Vector3(12, 0.045, 120), Vector3(cx, 0.045, 20), road)
+		_box(root, Vector3(0.4, 0.23, 120), Vector3(cx - 6.1, 0.115, 20), curb)
+		_box(root, Vector3(0.4, 0.23, 120), Vector3(cx + 6.1, 0.115, 20), curb)
+		for z in range(-30, 71, 6):
+			_box(root, Vector3(0.16, 0.01, 2.2), Vector3(cx, 0.075, z), paint, false)
+	# Sidewalks between the blocks (far side of near avenue + median blocks).
+	_box(root, Vector3(260, 0.12, 6), Vector3(0, 0.06, 27.0), walk)
+	_box(root, Vector3(260, 0.12, 6), Vector3(0, 0.06, 41.0), walk)
 	# Zebra crossing in front of the store.
 	for i in 7:
-		_box(root, Vector3(0.55, 0.012, 11.0), Vector3(4.0 + i * 0.9, 0.075, 18.0),
-			_mat(Color(0.9, 0.9, 0.88), 0.6), false)
+		_box(root, Vector3(0.55, 0.012, 11.0), Vector3(4.0 + i * 0.9, 0.075, 18.0), zebra, false)
+	# Crossings at the cross-street corners.
+	for cx in [-46.0, 46.0]:
+		for i in 6:
+			_box(root, Vector3(9.0, 0.012, 0.5), Vector3(cx, 0.075, 12.5 + i * 0.9), zebra, false)
 
 
 # ---------------------------------------------------------------- buildings
@@ -133,27 +148,53 @@ static func _buildings(root: Node3D) -> void:
 		Color(0.85, 0.87, 0.9), false)
 	_building(root, Vector2(18, 14), 26.0, Vector3(30, 0, -20.0), "Facade018A",
 		Color(0.9, 0.82, 0.77), false)
-	# Distant skyline behind, windows lit, to give the city depth.
-	var sky := -60.0
-	for i in 9:
+	# Second block of buildings along the far avenue (facing back toward shop).
+	var fx := -40.0
+	for i in 7:
+		var w := randf_range(9.0, 15.0)
+		_building(root, Vector2(w, 11), randf_range(18.0, 38.0),
+			Vector3(fx, 0, 57.0 + randf_range(-1, 1)), FACADES.pick_random(),
+			Color(0.85, 0.86, 0.9), false)
+		fx += w + randf_range(1.5, 3.0)
+	# Corner blocks along the cross streets.
+	for cx in [-58.0, 58.0]:
+		_building(root, Vector2(16, 20), randf_range(24.0, 40.0), Vector3(cx, 0, 30),
+			FACADES.pick_random(), Color(0.86, 0.87, 0.9), false)
+		_building(root, Vector2(16, 18), randf_range(20.0, 34.0), Vector3(cx, 0, -8),
+			"Facade018A", Color(0.9, 0.82, 0.77), false)
+	# Distant skyline in every direction, windows lit, for real depth.
+	for i in 14:
+		var h := randf_range(35.0, 85.0)
+		var w := randf_range(12.0, 22.0)
+		_building(root, Vector2(w, 14), h, Vector3(-95.0 + i * 14.0, 0, -75.0 - randf_range(0, 30)),
+			FACADES.pick_random(), Color(0.68, 0.72, 0.8), true)
+	for i in 10:
 		var h := randf_range(30.0, 70.0)
-		var w := randf_range(10.0, 18.0)
-		_building(root, Vector2(w, 12), h, Vector3(-55.0 + i * 14.0, 0, sky - randf_range(0, 20)),
-			FACADES.pick_random(), Color(0.7, 0.74, 0.8), true)
-	for i in 6:
-		var h := randf_range(26.0, 55.0)
-		_building(root, Vector2(12, 12), h, Vector3(-70.0 + i * 3.0, 0, 55.0 + randf_range(0, 25)),
-			"Facade012", Color(0.75, 0.75, 0.82), true)
+		_building(root, Vector2(14, 14), h, Vector3(-90.0 + i * 20.0, 0, 90.0 + randf_range(0, 30)),
+			"Facade012", Color(0.72, 0.73, 0.82), true)
+	for side in [-1.0, 1.0]:
+		for i in 8:
+			var h := randf_range(30.0, 75.0)
+			_building(root, Vector2(16, 16), h, Vector3(side * (95.0 + randf_range(0, 25)), 0,
+				-40.0 + i * 18.0), FACADES.pick_random(), Color(0.7, 0.73, 0.8), true)
 
 
 # ----------------------------------------------------------- street furniture
 
 static func _street_furniture(root: Node3D) -> void:
 	var pole_mat := MaterialLib.dark_steel(Color(0.24, 0.25, 0.27))
-	# Street lamps along both sidewalks.
-	for x in range(-40, 41, 12):
-		_lamp(root, Vector3(x, 0, 11.2), pole_mat, 1.0)
-		_lamp(root, Vector3(x, 0, 24.4), pole_mat, -1.0)
+	# Street lamps along the avenues; only the ones near the shop cast real
+	# light (keeps the dynamic-light count friendly on lower-end GPUs).
+	for x in range(-108, 109, 12):
+		var near := absi(x) <= 30
+		_lamp(root, Vector3(x, 0, 11.2), pole_mat, 1.0, near)
+		_lamp(root, Vector3(x, 0, 24.4), pole_mat, -1.0, near)
+		_lamp(root, Vector3(x, 0, 43.2), pole_mat, 1.0, false)
+		_lamp(root, Vector3(x, 0, 56.4), pole_mat, -1.0, false)
+	# Lamps down the cross streets.
+	for cx in [-46.0, 46.0]:
+		for z in range(-24, 67, 14):
+			_lamp(root, Vector3(cx - 6.6, 0, z), pole_mat, -1.0, false)
 	# Bench + bins + a bus shelter near the shop.
 	_bench(root, Vector3(-3.5, 0, 10.6))
 	_bench(root, Vector3(14.0, 0, 10.6))
@@ -168,7 +209,7 @@ static func _street_furniture(root: Node3D) -> void:
 	_box(root, Vector3(0.34, 0.12, 0.14), Vector3(-8.5, 0.5, 10.9), hy)
 
 
-static func _lamp(root: Node3D, base: Vector3, mat: Material, dir: float) -> void:
+static func _lamp(root: Node3D, base: Vector3, mat: Material, dir: float, lit: bool) -> void:
 	_cyl(root, 0.08, 5.0, base + Vector3(0, 2.5, 0), mat)
 	_box(root, Vector3(0.1, 0.1, 1.4), base + Vector3(0, 5.0, dir * 0.7), mat)
 	var head := MeshInstance3D.new()
@@ -183,13 +224,14 @@ static func _lamp(root: Node3D, base: Vector3, mat: Material, dir: float) -> voi
 	glow.emission_energy_multiplier = 3.0
 	head.material_override = glow
 	root.add_child(head)
-	var l := OmniLight3D.new()
-	l.position = base + Vector3(0, 4.7, dir * 1.3)
-	l.light_color = Color(1.0, 0.9, 0.72)
-	l.light_energy = 2.5
-	l.omni_range = 8.0
-	l.shadow_enabled = false
-	root.add_child(l)
+	if lit:
+		var l := OmniLight3D.new()
+		l.position = base + Vector3(0, 4.7, dir * 1.3)
+		l.light_color = Color(1.0, 0.9, 0.72)
+		l.light_energy = 2.5
+		l.omni_range = 8.0
+		l.shadow_enabled = false
+		root.add_child(l)
 
 
 static func _bench(root: Node3D, pos: Vector3) -> void:
@@ -265,10 +307,16 @@ static func _vehicles(root: Node3D) -> void:
 
 
 static func _car(root: Node3D, pos: Vector3, color: Color, flip: bool) -> void:
-	var car := Node3D.new()
+	var car := make_car(color)
 	car.position = pos
 	car.rotation_degrees.y = 90 if not flip else -90
 	root.add_child(car)
+
+
+## Builds a standalone car node (local +Z is forward). Reused for parked cars
+## and for moving traffic in CityLife.
+static func make_car(color: Color) -> Node3D:
+	var car := Node3D.new()
 	var body := MaterialLib.pbr("Metal009", 1.2, color * 1.4, true, 0.35, 1.0)
 	body.clearcoat_enabled = true
 	body.clearcoat = 0.7
@@ -309,6 +357,7 @@ static func _car(root: Node3D, pos: Vector3, color: Color, flip: bool) -> void:
 	tail.emission_energy_multiplier = 0.5
 	for hx in [-0.6, 0.6]:
 		_box(car, Vector3(0.3, 0.16, 0.06), Vector3(hx, 0.6, -2.12), tail)
+	return car
 
 
 # ------------------------------------------------------------------ greenery

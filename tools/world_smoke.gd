@@ -57,10 +57,10 @@ func _run() -> void:
 			player.camera.rotation.x = -0.04
 			await get_tree().create_timer(0.3).timeout
 			await _shot(dir + "/store.png")
-			# City view: stand on the sidewalk, look across the avenue.
-			player.global_position = Vector3(2.0, 0.1, 9.5)
-			player.rotation.y = deg_to_rad(178.0)
-			player.camera.rotation.x = 0.02
+			# City view: stand at the corner, look west down the avenue.
+			player.global_position = Vector3(24.0, 1.4, 12.4)
+			player.rotation.y = deg_to_rad(108.0)
+			player.camera.rotation.x = -0.02
 			await get_tree().create_timer(0.4).timeout
 			await _shot(dir + "/city.png")
 			# Street view: look down the avenue past the storefront.
