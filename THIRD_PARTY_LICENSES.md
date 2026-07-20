@@ -37,6 +37,9 @@ NormalGL and Roughness maps are shipped:
 | CorrugatedSteel007A | Ceiling deck |
 | Rubber004 | Conveyor belts |
 | Carpet016 | Office floor |
+| Metal009 (2K) | Machine bodies (brushed steel) |
+| Metal012 (2K) | Stainless tanks, lab bench, counter tops |
+| Plastic010 | Analyzer housings, plastic details |
 
 License text: https://creativecommons.org/publicdomain/zero/1.0/
 

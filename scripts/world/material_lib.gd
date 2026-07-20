@@ -89,3 +89,24 @@ static func cardboard(tint: Color = Color(1, 1, 1)) -> StandardMaterial3D:
 
 static func rubber_belt() -> StandardMaterial3D:
 	return pbr("Rubber004", 1.0, Color(0.35, 0.35, 0.37))
+
+
+# --- Machine-grade close-up materials (2K, world-triplanar so parts of one
+# machine read as a single continuous body with no UV stretching). ---
+
+static func machine_body(tint: Color = Color(1, 1, 1)) -> StandardMaterial3D:
+	var m := pbr("Metal009", 1.1, tint, true, 0.85, 1.0)
+	m.normal_scale = 1.2
+	return m
+
+
+static func stainless(tint: Color = Color(1, 1, 1)) -> StandardMaterial3D:
+	return pbr("Metal012", 1.2, tint, true, 0.9, 1.0)
+
+
+static func plastic(tint: Color = Color(1, 1, 1)) -> StandardMaterial3D:
+	return pbr("Plastic010", 1.6, tint, true, 0.0, 1.0)
+
+
+static func dark_steel(tint: Color = Color(0.35, 0.36, 0.38)) -> StandardMaterial3D:
+	return pbr("Metal030", 0.8, tint, true, 0.75, 1.0)

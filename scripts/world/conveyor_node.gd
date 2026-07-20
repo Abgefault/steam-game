@@ -36,7 +36,7 @@ func _ready() -> void:
 	rotation.y = atan2(-dir.z, dir.x)
 	add_child(bed)
 	# Side rails + legs.
-	var rail_mat := MaterialLib.painted_metal(Color(1.1, 1.12, 1.15))
+	var rail_mat := MaterialLib.machine_body(Color(1.2, 1.22, 1.25))
 	for zoff in [-0.28, 0.28]:
 		var rail := MeshInstance3D.new()
 		var rail_mesh := BoxMesh.new()

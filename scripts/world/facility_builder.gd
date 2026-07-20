@@ -368,6 +368,27 @@ static func _props(root: Node3D) -> void:
 		_box(root, Vector3(0.12, 0.3, 0.24), Vector3(12.7 + i * 0.16, 1.78, 0.2),
 			_mat([Color(0.5, 0.25, 0.2), Color(0.2, 0.35, 0.5), Color(0.25, 0.45, 0.3),
 				Color(0.6, 0.5, 0.25)].pick_random(), 0.7), false)
+	# Steel I-beam trusses under the ceiling carry the industrial look.
+	var beam := MaterialLib.dark_steel(Color(0.3, 0.31, 0.34))
+	for bz in [-8.0, -5.0, -2.0, 1.0, 4.0]:
+		_box(root, Vector3(28.2, 0.05, 0.3), Vector3(0, WALL_H - 0.42, bz), beam, false)  # bottom flange
+		_box(root, Vector3(28.2, 0.34, 0.06), Vector3(0, WALL_H - 0.22, bz), beam, false) # web
+		_box(root, Vector3(28.2, 0.05, 0.3), Vector3(0, WALL_H - 0.05, bz), beam, false)  # top flange
+	# Baseboards along the perimeter ground the walls.
+	var base_mat := MaterialLib.dark_steel(Color(0.25, 0.26, 0.28))
+	_box(root, Vector3(28.4, 0.16, 0.06), Vector3(0, 0.2, -9.8), base_mat, false)
+	_box(root, Vector3(0.06, 0.16, 18.0), Vector3(-13.95, 0.2, -0.95), base_mat, false)
+	_box(root, Vector3(0.06, 0.16, 18.0), Vector3(13.95, 0.2, -0.95), base_mat, false)
+	_box(root, Vector3(19.4, 0.16, 0.06), Vector3(-4.1, 0.2, 7.82), base_mat, false)
+	# Reflection probes make metals and floors mirror the room (Forward+).
+	for probe_conf in [[Vector3(-6, 2, -3), Vector3(16, 4.4, 18)],
+			[Vector3(7.8, 2, 4.6), Vector3(13, 4.4, 7)]]:
+		var probe := ReflectionProbe.new()
+		probe.position = probe_conf[0]
+		probe.size = probe_conf[1]
+		probe.intensity = 0.6
+		probe.update_mode = ReflectionProbe.UPDATE_ONCE
+		root.add_child(probe)
 	# Fake skylight strips brighten the production hall naturally.
 	var sky_mat := StandardMaterial3D.new()
 	sky_mat.albedo_color = Color(0.9, 0.95, 1.0)
